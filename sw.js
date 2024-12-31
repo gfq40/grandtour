@@ -7,33 +7,35 @@ const ASSETS_TO_CACHE = [
   // Aggiungi qui i tuoi css/js/img, etc.
 ];
 
-self.addEventListener('install', e => {
-  e.waitUntil(
+// Install
+self.addEventListener('install', event => {
+  event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       return cache.addAll(ASSETS_TO_CACHE);
     })
   );
 });
 
-self.addEventListener('activate', e => {
-  e.waitUntil(
+// Activate
+self.addEventListener('activate', event => {
+  event.waitUntil(
     caches.keys().then(keys => {
-      return Promise.all(keys.map(key => {
-        if(key !== CACHE_NAME){
-          return caches.delete(key);
-        }
-      }));
+      return Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      );
     })
   );
 });
 
-self.addEventListener('fetch', e => {
-  e.respondWith(
-    caches.match(e.request).then(cached => {
-      return cached || fetch(e.request);
+// Fetch
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request).then(cached => {
+      return cached || fetch(event.request);
     })
   );
 });
-
-
-
