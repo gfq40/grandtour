@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#000000" />
   <meta charset="UTF-8">
   <title>ULTRSKY - PRIVERNO</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
+  <!-- MANIFEST PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
 
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,24 +15,20 @@
 
   <style>
     :root {
-      /* Sfondo scuro + gradiente blu/notte */
       --color-bg-start: #06121f;
       --color-bg-end:   #0f1c2d; 
       --color-bg-header: rgba(0,0,0,0.7);
 
-      /* Testi e colori principali */
       --color-text-main: #ddd;
       --color-title-blu: #3B6CB7;
       --color-gold:      #b08d57;
 
-      /* Card, Bordi, Bottone “Ascolta” */
       --color-card-bg:       #1b2b41;
       --color-border:        #3B6CB7;
       --color-border-hover:  #74a3d4;
       --color-speak-bg:      #1E4477; 
       --color-speak-txt:     #fff;     
 
-      /* Modal */
       --modal-bg:     rgba(15,28,48,0.9);
       --modal-border: #3B6CB7;
 
@@ -75,7 +73,6 @@
       height:40px; 
       width:auto;
     }
-    /* TITOLO: ULTRSKY - PRIVERNO */
     #header-title {
       font-weight:600;
       font-size:1.2rem;
@@ -84,7 +81,7 @@
       letter-spacing:1px;
     }
 
-    /* HAMBURGER lines in ORO */
+    /* HAMBURGER lines ORO */
     .hamburger-icon {
       width:30px; 
       height:25px;
@@ -165,7 +162,7 @@
     .intro {
       margin-bottom:20px;
       text-align:center;
-      /* ABBASSIAMO DI 3em */
+      /* ABBASSATA di 3em */
       margin-top:3em;
     }
     .intro h2 {
@@ -179,7 +176,24 @@
       line-height:1.5;
     }
 
-    /* OPERE ULTRSKY */
+    /* PULSANTE “Installa” */
+    #btn-install {
+      display:none; 
+      background:none;
+      border:1px solid var(--color-border);
+      color: var(--color-text-main);
+      padding:6px 14px;
+      border-radius:20px;
+      cursor:pointer;
+      margin-bottom:10px; 
+      transition:transform 0.2s, border 0.3s;
+    }
+    #btn-install:hover {
+      transform:scale(1.05);
+      border-color:var(--color-border-hover);
+    }
+
+    /* LISTA OPERE */
     .exhibition-list {
       display:flex;
       flex-wrap:wrap;
@@ -194,7 +208,7 @@
       padding:16px;
       width:240px;
       cursor:pointer;
-      transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+      transition:transform 0.3s, box-shadow 0.3s, border 0.3s;
       box-shadow:0 2px 8px rgba(0,0,0,0.4);
     }
     .piece-card:hover {
@@ -214,7 +228,6 @@
       margin-bottom:10px;
       color: var(--color-text-main);
     }
-    /* Tasto “Ascolta” => “Interrompi” al click */
     .speak-btn {
       background: var(--color-speak-bg);
       border:1px solid var(--color-border);
@@ -231,19 +244,19 @@
       border-color: var(--color-border-hover);
     }
 
-    /* BOTTOM BAR FISSA */
+    /* BOTTOM BAR */
     .bottom-bar {
       position:fixed;
       bottom:0; 
       left:0;
       width:100%;
-      height:70px; 
+      height:70px;
       background: var(--color-bg-header);
       box-shadow:0 -2px 6px rgba(0,0,0,0.6);
       display:flex;
       align-items:center;
       justify-content:center;
-      z-index:9999; 
+      z-index:9999;
       color: var(--color-text-main);
       font-size:0.85rem;
     }
@@ -273,7 +286,7 @@
       max-height:90vh;
       overflow-y:auto;
       position:relative;
-      color: var(--color-text-main);
+      color:var(--color-text-main);
       box-shadow:0 2px 20px rgba(0,0,0,0.8);
     }
     .modal-content h2 {
@@ -329,7 +342,7 @@
       border:none;
     }
 
-    /* ULTRSKY 01 - testo extra */
+    /* ULTRSKY 01 testo extra */
     .hidden-content {
       display:none;
       margin-top:10px;
@@ -369,8 +382,6 @@
       transform:scale(1.05);
       border-color:var(--color-border-hover);
     }
-
-    /* SHARE POPUP */
     .share-popup {
       position:absolute;
       top:calc(100% + 5px);
@@ -394,6 +405,11 @@
       border-radius:4px;
       cursor:pointer;
     }
+
+    @keyframes fadeIn {
+      from { opacity:0; transform:scale(0.95);}
+      to   { opacity:1; transform:scale(1);}
+    }
   </style>
 </head>
 <body>
@@ -402,7 +418,7 @@
 <header>
   <div id="header-left">
     <img 
-      src="https://www.ultrasky.it/news/wp-content/uploads/2024/11/loghino-scarabeo-80.png"
+      src="https://www.ultrasky.it/news/wp-content/uploads/2024/11/loghino-scarabeo-80.png" 
       alt="Ultrasky Logo"
       class="logo"
     >
@@ -432,7 +448,7 @@
 
 <!-- MAIN -->
 <main>
-  <!-- Scritta BENVENUTI ABBASSATA A 3em -->
+  <!-- BENVENUTI ABBASSATA A 3em -->
   <section class="intro">
     <h2>Benvenuti in Ultrasky</h2>
     <p>
@@ -440,17 +456,20 @@
       in ambito artistico, scientifico e storico. Inoltre, esplora le 20 opere 
       ULTRSKY con descrizioni e “Ascolta” TTS!
     </p>
+
+    <!-- PULSANTE INSTALLA PWA (inizialmente nascosto) -->
+    <button id="btn-install">Installa</button>
   </section>
 
   <!-- OPERE ULTRSKY -->
   <section>
     <div class="exhibition-list" id="exhibition-list">
-      <!-- Generato da JS -->
+      <!-- generato da JS -->
     </div>
   </section>
 </main>
 
-<!-- NAVBAR FISSA IN BASSO -->
+<!-- NAVBAR BASSA FISSA -->
 <div class="bottom-bar">
   <p style="margin:0;">© 2024 UltraSky - All Rights Reserved</p>
 </div>
@@ -466,25 +485,20 @@
   </div>
 </div>
 
-<!-- MODAL ULTRSKY 01 (Espanso) -->
+<!-- MODAL ULTRSKY 01 -->
 <div class="modal-overlay" id="modal-ultrsky01-extended">
   <div class="modal-content" style="max-width:600px; position:relative;">
     <button class="modal-close" data-close="ultrsky01-extended">X</button>
     <h2>ULTRSKY 01 - Approfondimento</h2>
     <p>
-      La mostra “Ultrasky” include un intervento particolarmente significativo del gruppo CACO3...
+      La mostra “Ultrasky” include un intervento particolarmente significativo 
+      del gruppo CACO3...
       <button class="read-more-btn" id="read-more-btn">Continua a leggere</button>
     </p>
     <div class="hidden-content" id="hidden-content">
-      <p>
-        ...per intraprendere un percorso di ricerca contemporanea...
-      </p>
-      <p>
-        ...CACO3 innova il metodo tradizionale mediante l’impiego di tessere leggere e dinamiche...
-      </p>
-      <p>
-        ...Osservare l’installazione significa assistere a una danza di piccole tessere...
-      </p>
+      <p>...per intraprendere un percorso di ricerca contemporanea...</p>
+      <p>...CACO3 innova il metodo tradizionale con tessere leggere...</p>
+      <p>...Osservare l’installazione significa assistere a una danza di piccole tessere...</p>
       <button class="read-more-btn" id="reduce-btn">Riduci testo</button>
     </div>
 
@@ -519,12 +533,22 @@
   </div>
 </div>
 
-<!-- MODAL IMMAGINE FULLSCREEN -->
+<!-- MODAL FULLSCREEN IMG -->
 <div class="modal-overlay" id="img-modal">
   <img id="img-modal-img" src="" alt="Fullscreen">
 </div>
 
 <script>
+/* REGISTRA SERVICE WORKER (PWA) */
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('./sw.js') // il tuo sw
+      .then(() => console.log('SW registrato!'))
+      .catch(err => console.error('SW fallito:', err));
+  });
+}
+
 /* MENU HAMBURGER */
 const hamburgerBtn = document.getElementById('hamburger-btn');
 const hamburgerMenu= document.getElementById('hamburger-menu');
@@ -536,26 +560,26 @@ hamburgerBtn.addEventListener('click', ()=>{
 const closeBtns= document.querySelectorAll('.modal-close');
 closeBtns.forEach(btn=>{
   btn.addEventListener('click', ()=>{
-    const target= btn.dataset.close;
+    const target=btn.dataset.close;
     document.getElementById('modal-'+target).classList.remove('active');
   });
 });
 function closeAllModals(){
-  document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+  document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('active'));
 }
 
-/* Esempio Apertura Blu Egizio */
+/* Esempio Apertura “Blu Egizio” */
 const btnBluEgizio= document.getElementById('btn-blu-egizio');
 const modalBluEgizio= document.getElementById('modal-blu-egizio');
 if(btnBluEgizio){
-  btnBluEgizio.addEventListener('click', ()=>{
+  btnBluEgizio.addEventListener('click',()=>{
     closeAllModals();
     modalBluEgizio.classList.add('active');
     document.body.classList.remove('menu-open');
   });
 }
 
-/* 20 OPERE (solo ULTRSKY 01 ha hasExtended:true) */
+/* 20 OPERE + Ascolta/Interrompi */
 const pieces=[
   { id:1,  title:"ULTRSKY 01", description:"Approfondimento su micromosaico e CACO3.", hasExtended:true },
   { id:2,  title:"ULTRSKY 02", description:"Un turbinio di colori e particelle in danza cosmica." },
@@ -578,30 +602,27 @@ const pieces=[
   { id:19, title:"ULTRSKY 19",description:"Proiezioni olografiche: evoluzione di galassie, dal Big Bang..." },
   { id:20, title:"ULTRSKY 20",description:"Polittico monumentale, scene cosmiche e simboli alchemici..."}
 ];
-
 const listContainer= document.getElementById('exhibition-list');
 
-/* Funzione toggleSpeak => alterna “Ascolta” / “Interrompi” */
+/* Funzione toggleSpeak => “Ascolta” / “Interrompi” */
 function toggleSpeak(button, text){
   if(!('speechSynthesis' in window)){
-    alert("Sintesi vocale non supportata dal tuo browser!");
+    alert("Sintesi vocale non supportata!");
     return;
   }
-  // Se sta già parlando => Interrompi
   if(button.dataset.speaking==="true"){
-    speechSynthesis.cancel(); // ferma l'audio
+    // Interrompi
+    speechSynthesis.cancel();
     button.dataset.speaking="false";
     button.textContent="Ascolta";
   } else {
-    // avvia la sintesi
+    // Avvia TTS
     const utter=new SpeechSynthesisUtterance(text);
     utter.lang="it-IT";
-    // quando finisce => reset
     utter.onend=()=>{
       button.dataset.speaking="false";
       button.textContent="Ascolta";
     };
-    // avvio
     speechSynthesis.speak(utter);
     button.dataset.speaking="true";
     button.textContent="Interrompi";
@@ -620,19 +641,17 @@ pieces.forEach(p=>{
   desc.className='piece-desc';
   desc.textContent=p.description;
 
-  // Pulsante TTS con toggle
   const speakBtn=document.createElement('button');
   speakBtn.className='speak-btn';
   speakBtn.textContent='Ascolta';
-  speakBtn.dataset.speaking="false"; // default
+  speakBtn.dataset.speaking="false";
 
-  // Al click => toggleSpeak
   speakBtn.addEventListener('click',(e)=>{
-    e.stopPropagation(); // per non triggerare il click della card
+    e.stopPropagation();
     toggleSpeak(speakBtn, p.description);
   });
 
-  // Se clic su card => open modal se hasExtended
+  // Apertura modal ULTRSKY 01 se hasExtended
   card.addEventListener('click',()=>{
     if(p.hasExtended){
       closeAllModals();
@@ -646,10 +665,10 @@ pieces.forEach(p=>{
   listContainer.appendChild(card);
 });
 
-/* “Continua a leggere” / “Riduci testo” (ULTRSKY 01) */
-const readMoreBtn  = document.getElementById('read-more-btn');
-const hiddenContent= document.getElementById('hidden-content');
-const reduceBtn    = document.getElementById('reduce-btn');
+/* CONTINUA/REDUCI (ULTRSKY 01) */
+const readMoreBtn   = document.getElementById('read-more-btn');
+const hiddenContent = document.getElementById('hidden-content');
+const reduceBtn     = document.getElementById('reduce-btn');
 if(readMoreBtn){
   readMoreBtn.addEventListener('click',()=>{
     hiddenContent.style.display='block';
@@ -682,11 +701,11 @@ if(imgModal){
   });
 }
 
-/* LIKE con limitazione (1) localStorage (ULTRSKY 01) */
+/* LIKE ULTRSKY 01 */
 let likeCount=0;
 const likeBtn      = document.getElementById('like-btn');
 const likeCountSpan= document.getElementById('like-count');
-const liked        = localStorage.getItem('ultrsky01_liked'); 
+const liked= localStorage.getItem('ultrsky01_liked'); 
 if(liked==='true'){
   likeCount=1;
   likeCountSpan.textContent=likeCount;
@@ -705,11 +724,10 @@ if(likeBtn){
   });
 }
 
-/* SHARE su ULTRSKY 01 + popup */
-const shareBtn   = document.getElementById('share-btn');
-const sharePopup = document.getElementById('share-popup');
-// link fittizio
-const photoURL   = "https://mywebsite.com/foto-ultrsky01.jpg";
+/* SHARE su ULTRSKY 01 */
+const shareBtn  = document.getElementById('share-btn');
+const sharePopup= document.getElementById('share-popup');
+const photoURL  = "https://mywebsite.com/foto-ultrsky01.jpg";
 
 if(shareBtn){
   shareBtn.addEventListener('click',(e)=>{
@@ -717,70 +735,54 @@ if(shareBtn){
     sharePopup.classList.toggle('active');
   });
 }
-// Chiudi popup se clic altrove
 document.addEventListener('click',(e)=>{
   if(sharePopup.classList.contains('active') && e.target!==shareBtn && !sharePopup.contains(e.target)){
     sharePopup.classList.remove('active');
   }
 });
-const shareIcons= document.querySelectorAll('.share-icon');
+const shareIcons=document.querySelectorAll('.share-icon');
 shareIcons.forEach(icon=>{
   icon.addEventListener('click',(e)=>{
     e.stopPropagation();
-    const social= icon.dataset.social;
+    const social=icon.dataset.social;
     let url="";
     if(social==="facebook"){
-      url=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(photoURL)}`;
+      url=https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(photoURL)};
     } else if(social==="x"){
-      url=`https://twitter.com/intent/tweet?url=${encodeURIComponent(photoURL)}`;
+      url=https://twitter.com/intent/tweet?url=${encodeURIComponent(photoURL)};
     } else if(social==="instagram"){
-      url=`https://www.instagram.com/`;
+      url=https://www.instagram.com/;
     }
     window.open(url,"_blank");
     sharePopup.classList.remove('active');
   });
 });
-</script>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker
-        .register('./sw.js')
-        .then(() => console.log('Service Worker registered'))
-        .catch(err => console.error('Service Worker registration failed:', err));
+
+/* BOTTORE “INSTALLA” PWA (beforeinstallprompt) */
+let deferredPrompt; 
+const installBtn = document.getElementById('btn-install');
+
+window.addEventListener('beforeinstallprompt', e => {
+  // Blocca la mini-infobar
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = 'inline'; // Mostra il pulsante “Installa”
+});
+
+installBtn.addEventListener('click', () => {
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(choice => {
+      if(choice.outcome === 'accepted'){
+        console.log('PWA installata con successo');
+      } else {
+        console.log('Installazione rifiutata');
+      }
+      deferredPrompt = null;
+      installBtn.style.display='none';
     });
   }
-</script>
-<script>
-  let deferredPrompt; // memorizzeremo l’evento qui
-  const installBtn = document.getElementById('btn-install'); // tuo bottone “Installa”
-  installBtn.style.display = 'none'; // inizialmente nascosto
-
-  window.addEventListener('beforeinstallprompt', e => {
-    // Impedisce la mini-infobar
-    e.preventDefault();
-    deferredPrompt = e;
-    // Mostra il tuo bottone “Installa”
-    installBtn.style.display = 'inline-block';
-  });
-
-  installBtn.addEventListener('click', () => {
-    if(deferredPrompt){
-      // Mostra la prompt di install
-      deferredPrompt.prompt();
-      // Aspetta la scelta dell’utente
-      deferredPrompt.userChoice.then(choice => {
-        if(choice.outcome === 'accepted'){
-          console.log('PWA installata');
-        } else {
-          console.log('Installazione rifiutata');
-        }
-        // Reset
-        deferredPrompt = null;
-        installBtn.style.display = 'none';
-      });
-    }
-  });
+});
 </script>
 </body>
 </html>
