@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>ULTRSKY - PRIVERNO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" />
+
+  <style>
+    :root {
+      /* Sfondo scuro + gradiente blu/notte */
+      --color-bg-start: #06121f;
+      --color-bg-end:   #0f1c2d; 
+      --color-bg-header: rgba(0,0,0,0.7);
+
+      /* Testi e colori principali */
+      --color-text-main: #ddd;
+      --color-title-blu: #3B6CB7;
+      --color-gold:      #b08d57;
+
+      /* Card, Bordi, Bottone “Ascolta” */
+      --color-card-bg:       #1b2b41;
+      --color-border:        #3B6CB7;
+      --color-border-hover:  #74a3d4;
+      --color-speak-bg:      #1E4477; 
+      --color-speak-txt:     #fff;     
+
+      /* Modal */
+      --modal-bg:     rgba(15,28,48,0.9);
+      --modal-border: #3B6CB7;
+
+      --transition-speed: 0.4s;
+    }
+
+    * {
+      margin:0; 
+      padding:0; 
+      box-sizing:border-box;
+    }
+    html, body {
+      width:100%; 
+      height:100%;
+      font-family:'Poppins', sans-serif;
+      background: linear-gradient(to bottom, var(--color-bg-start), var(--color-bg-end));
+      color: var(--color-text-main);
+      overflow-x:hidden;
+      transition: background var(--transition-speed), color var(--transition-speed);
+    }
+
+    /* HEADER in alto */
+    header {
+      position:fixed;
+      top:0; 
+      left:0;
+      width:100%;
+      padding:10px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      z-index:9999;
+      background: var(--color-bg-header);
+      box-shadow:0 2px 8px rgba(0,0,0,0.6);
+    }
+    #header-left {
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .logo {
+      height:40px; 
+      width:auto;
+    }
+    /* TITOLO: ULTRSKY - PRIVERNO */
+    #header-title {
+      font-weight:600;
+      font-size:1.2rem;
+      color: var(--color-title-blu);
+      text-transform: uppercase;
+      letter-spacing:1px;
+    }
+
+    /* HAMBURGER lines in ORO */
+    .hamburger-icon {
+      width:30px; 
+      height:25px;
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .hamburger-icon div {
+      background-color: var(--color-gold);
+      height:3px;
+      border-radius:1px;
+      transition:transform 0.3s, opacity 0.3s;
+    }
+
+    /* MENU TENDINA */
+    .menu-container {
+      position:absolute;
+      top:60px; 
+      right:20px;
+      width:240px;
+      background:rgba(0,0,0,0.9);
+      border:1px solid var(--color-border);
+      border-radius:8px;
+      padding:10px;
+      display:none;
+      flex-direction:column;
+      gap:10px;
+      box-shadow:0 4px 15px rgba(0,0,0,0.7);
+      animation: fadeIn var(--transition-speed) ease;
+    }
+    @keyframes fadeIn {
+      from { opacity:0; transform:scale(0.95);}
+      to   { opacity:1; transform:scale(1);}
+    }
+    .menu-list {
+      list-style:none;
+      margin:0; 
+      padding:0;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .menu-list li {
+      background:transparent;
+      border:1px solid var(--color-border);
+      border-radius:5px;
+      padding:8px;
+      text-align:center;
+      transition: background 0.3s, border 0.3s;
+      cursor:pointer;
+    }
+    .menu-list li:hover {
+      background:rgba(255,255,255,0.07);
+      border-color: var(--color-border-hover);
+    }
+
+    body.menu-open .menu-container {
+      display:flex;
+    }
+    body.menu-open .hamburger-icon div:nth-child(1) {
+      transform:rotate(45deg) translateY(9px);
+    }
+    body.menu-open .hamburger-icon div:nth-child(2) {
+      opacity:0;
+    }
+    body.menu-open .hamburger-icon div:nth-child(3) {
+      transform:rotate(-45deg) translateY(-9px);
+    }
+
+    /* MAIN */
+    main {
+      margin-top:70px; 
+      padding:20px;
+      max-width:1200px;
+      margin:0 auto;
+    }
+    .intro {
+      margin-bottom:20px;
+      text-align:center;
+      /* ABBASSIAMO DI 3em */
+      margin-top:3em;
+    }
+    .intro h2 {
+      font-size:1.4rem;
+      font-weight:600;
+      margin-bottom:8px;
+    }
+    .intro p {
+      max-width:600px;
+      margin:0 auto;
+      line-height:1.5;
+    }
+
+    /* OPERE ULTRSKY */
+    .exhibition-list {
+      display:flex;
+      flex-wrap:wrap;
+      gap:25px;
+      justify-content:center;
+      margin-top:30px;
+    }
+    .piece-card {
+      background: var(--color-card-bg);
+      border:1px solid var(--color-border);
+      border-radius:8px;
+      padding:16px;
+      width:240px;
+      cursor:pointer;
+      transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+      box-shadow:0 2px 8px rgba(0,0,0,0.4);
+    }
+    .piece-card:hover {
+      transform:scale(1.02);
+      box-shadow:0 5px 15px rgba(0,0,0,0.6);
+      border-color: var(--color-border-hover);
+    }
+    .piece-title {
+      font-size:1rem;
+      font-weight:600;
+      margin-bottom:6px;
+      color: var(--color-gold);
+    }
+    .piece-desc {
+      font-size:0.85rem;
+      line-height:1.3;
+      margin-bottom:10px;
+      color: var(--color-text-main);
+    }
+    /* Tasto “Ascolta” => “Interrompi” al click */
+    .speak-btn {
+      background: var(--color-speak-bg);
+      border:1px solid var(--color-border);
+      border-radius:20px;
+      padding:6px 14px;
+      color: var(--color-speak-txt);
+      cursor:pointer;
+      font-size:0.85rem;
+      transition:transform 0.2s, box-shadow 0.2s, background 0.3s, border 0.3s;
+    }
+    .speak-btn:hover {
+      transform:scale(1.05);
+      box-shadow:0 3px 8px rgba(0,0,0,0.4);
+      border-color: var(--color-border-hover);
+    }
+
+    /* BOTTOM BAR FISSA */
+    .bottom-bar {
+      position:fixed;
+      bottom:0; 
+      left:0;
+      width:100%;
+      height:70px; 
+      background: var(--color-bg-header);
+      box-shadow:0 -2px 6px rgba(0,0,0,0.6);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:9999; 
+      color: var(--color-text-main);
+      font-size:0.85rem;
+    }
+
+    /* MODAL GENERICO */
+    .modal-overlay {
+      position:fixed;
+      top:0; left:0;
+      width:100vw; 
+      height:100vh;
+      background:rgba(0,0,0,0.8);
+      z-index:99999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+    .modal-overlay.active {
+      display:flex;
+    }
+    .modal-content {
+      background: var(--modal-bg);
+      border:1px solid var(--modal-border);
+      border-radius:10px;
+      padding:20px;
+      max-width:800px;
+      max-height:90vh;
+      overflow-y:auto;
+      position:relative;
+      color: var(--color-text-main);
+      box-shadow:0 2px 20px rgba(0,0,0,0.8);
+    }
+    .modal-content h2 {
+      margin-bottom:10px;
+      font-size:1.2rem;
+      font-weight:600;
+      color: var(--color-title-blu); 
+    }
+    .modal-content p {
+      line-height:1.5;
+      margin-bottom:10px;
+    }
+    .modal-close {
+      position:absolute;
+      top:15px; 
+      right:15px;
+      background:none;
+      border:1px solid var(--color-border);
+      border-radius:50%;
+      color: var(--color-text-main);
+      width:36px; 
+      height:36px;
+      font-weight:bold;
+      cursor:pointer;
+      font-size:1.1rem;
+      transition: transform 0.3s, background 0.3s, border 0.3s;
+    }
+    .modal-close:hover {
+      transform:scale(1.1);
+      background:rgba(255,255,255,0.07);
+      border-color: var(--color-border-hover);
+    }
+    .modal-content img {
+      display:block;
+      max-width:100%;
+      margin:15px 0;
+      border-radius:8px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.6);
+      cursor:pointer;
+    }
+    .video-wrapper {
+      margin:20px 0;
+      position:relative;
+      overflow:hidden;
+      padding-top:56.25%;
+    }
+    .video-wrapper iframe {
+      position:absolute;
+      top:0; 
+      left:0;
+      width:100%; 
+      height:100%;
+      border:none;
+    }
+
+    /* ULTRSKY 01 - testo extra */
+    .hidden-content {
+      display:none;
+      margin-top:10px;
+      font-size:0.9rem;
+      line-height:1.4;
+    }
+    .read-more-btn {
+      background:none;
+      border:none;
+      color:var(--color-border-hover);
+      text-decoration:underline;
+      cursor:pointer;
+      font-size:0.85rem;
+      margin-top:5px;
+    }
+
+    /* LIKE & SHARE */
+    .like-share-container {
+      margin-top:10px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      position:relative;
+      z-index:1000;
+    }
+    .like-btn, .share-btn {
+      background:none;
+      border:1px solid var(--color-border);
+      color: var(--color-text-main);
+      padding:5px 10px;
+      border-radius:20px;
+      cursor:pointer;
+      transition:transform 0.2s, border 0.3s;
+      font-size:0.85rem;
+    }
+    .like-btn:hover, .share-btn:hover {
+      transform:scale(1.05);
+      border-color:var(--color-border-hover);
+    }
+
+    /* SHARE POPUP */
+    .share-popup {
+      position:absolute;
+      top:calc(100% + 5px);
+      right:0;
+      background:#222;
+      border:1px solid #666;
+      border-radius:6px;
+      padding:8px;
+      display:none;
+      flex-direction:row;
+      gap:5px;
+      z-index:2000;
+    }
+    .share-popup.active {
+      display:flex;
+    }
+    .share-icon {
+      width:24px; 
+      height:24px;
+      background:#fff; 
+      border-radius:4px;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div id="header-left">
+    <img 
+      src="https://www.ultrasky.it/news/wp-content/uploads/2024/11/loghino-scarabeo-80.png"
+      alt="Ultrasky Logo"
+      class="logo"
+    >
+    <div id="header-title">ULTRSKY - PRIVERNO</div>
+  </div>
+
+  <!-- Hamburger Icon + Menu -->
+  <div class="hamburger-icon" id="hamburger-btn">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div class="menu-container" id="hamburger-menu">
+    <ul class="menu-list">
+      <li id="btn-blu-egizio">Alla scoperta del Blu Egizio</li>
+      <li id="btn-storia">La Storia</li>
+      <li id="btn-scienza">La Scienza</li>
+      <li id="btn-arti">Le Arti</li>
+      <li id="btn-programma">Programma</li>
+      <li id="btn-artisti">Artisti</li>
+      <li id="btn-contatti">Contatti</li>
+      <li id="btn-catalogo">Catalogo Digitale</li>
+      <li id="btn-crediti">Crediti</li>
+    </ul>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main>
+  <!-- Scritta BENVENUTI ABBASSATA A 3em -->
+  <section class="intro">
+    <h2>Benvenuti in Ultrasky</h2>
+    <p>
+      Scopri la mostra dedicata al Blu Egizio e alle sue infinite potenzialità 
+      in ambito artistico, scientifico e storico. Inoltre, esplora le 20 opere 
+      ULTRSKY con descrizioni e “Ascolta” TTS!
+    </p>
+  </section>
+
+  <!-- OPERE ULTRSKY -->
+  <section>
+    <div class="exhibition-list" id="exhibition-list">
+      <!-- Generato da JS -->
+    </div>
+  </section>
+</main>
+
+<!-- NAVBAR FISSA IN BASSO -->
+<div class="bottom-bar">
+  <p style="margin:0;">© 2024 UltraSky - All Rights Reserved</p>
+</div>
+
+<!-- MODAL Blu Egizio -->
+<div class="modal-overlay" id="modal-blu-egizio">
+  <div class="modal-content">
+    <button class="modal-close" data-close="blu-egizio">X</button>
+    <h2>Alla scoperta del Blu Egizio</h2>
+    <p>
+      La mostra “Ultrasky: alla scoperta del Blu Egizio, dalle Arti alle Scienze” ...
+    </p>
+  </div>
+</div>
+
+<!-- MODAL ULTRSKY 01 (Espanso) -->
+<div class="modal-overlay" id="modal-ultrsky01-extended">
+  <div class="modal-content" style="max-width:600px; position:relative;">
+    <button class="modal-close" data-close="ultrsky01-extended">X</button>
+    <h2>ULTRSKY 01 - Approfondimento</h2>
+    <p>
+      La mostra “Ultrasky” include un intervento particolarmente significativo del gruppo CACO3...
+      <button class="read-more-btn" id="read-more-btn">Continua a leggere</button>
+    </p>
+    <div class="hidden-content" id="hidden-content">
+      <p>
+        ...per intraprendere un percorso di ricerca contemporanea...
+      </p>
+      <p>
+        ...CACO3 innova il metodo tradizionale mediante l’impiego di tessere leggere e dinamiche...
+      </p>
+      <p>
+        ...Osservare l’installazione significa assistere a una danza di piccole tessere...
+      </p>
+      <button class="read-more-btn" id="reduce-btn">Riduci testo</button>
+    </div>
+
+    <img 
+      src="https://64.media.tumblr.com/1c6a8f123b3ecfe43ea74cbe4fe0b8aa/tumblr_o3me1uDL8i1qdh7ndo1_540.jpg"
+      alt="Micromosaico CACO3"
+      style="cursor:pointer; margin-top:10px;"
+      id="ultrsky01-img"
+    >
+
+    <div class="like-share-container">
+      <button class="like-btn" id="like-btn">Like</button>
+      <span id="like-count">0</span>
+
+      <div style="position:relative;">
+        <button class="share-btn" id="share-btn">Condividi</button>
+        <div class="share-popup" id="share-popup">
+          <div class="share-icon" style="background:#4267B2;" data-social="facebook" title="Facebook"></div>
+          <div class="share-icon" style="background:#1DA1F2;" data-social="x"        title="X"></div>
+          <div class="share-icon" style="background:#E1306C;" data-social="instagram" title="Instagram"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-wrapper" style="margin-top:10px;">
+      <iframe 
+        src="https://www.youtube.com/embed/vJsiPNdQCzk"
+        title="CaCO3"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL IMMAGINE FULLSCREEN -->
+<div class="modal-overlay" id="img-modal">
+  <img id="img-modal-img" src="" alt="Fullscreen">
+</div>
+
+<script>
+/* MENU HAMBURGER */
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const hamburgerMenu= document.getElementById('hamburger-menu');
+hamburgerBtn.addEventListener('click', ()=>{
+  document.body.classList.toggle('menu-open');
+});
+
+/* CHIUSURA MODAL con X */
+const closeBtns= document.querySelectorAll('.modal-close');
+closeBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const target= btn.dataset.close;
+    document.getElementById('modal-'+target).classList.remove('active');
+  });
+});
+function closeAllModals(){
+  document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+}
+
+/* Esempio Apertura Blu Egizio */
+const btnBluEgizio= document.getElementById('btn-blu-egizio');
+const modalBluEgizio= document.getElementById('modal-blu-egizio');
+if(btnBluEgizio){
+  btnBluEgizio.addEventListener('click', ()=>{
+    closeAllModals();
+    modalBluEgizio.classList.add('active');
+    document.body.classList.remove('menu-open');
+  });
+}
+
+/* 20 OPERE (solo ULTRSKY 01 ha hasExtended:true) */
+const pieces=[
+  { id:1,  title:"ULTRSKY 01", description:"Approfondimento su micromosaico e CACO3.", hasExtended:true },
+  { id:2,  title:"ULTRSKY 02", description:"Un turbinio di colori e particelle in danza cosmica." },
+  { id:3,  title:"ULTRSKY 03", description:"Frammento di cometa racchiuso in sfera di vetro..." },
+  { id:4,  title:"ULTRSKY 04", description:"Linee geometriche e orbite planetarie tra arte e scienza." },
+  { id:5,  title:"ULTRSKY 05", description:"Tela monocromatica di bagliori ultravioletti sospesi..." },
+  { id:6,  title:"ULTRSKY 06", description:"Riflessi di luce cangiante evocanti l’aurora boreale." },
+  { id:7,  title:"ULTRSKY 07", description:"Mosaico digitale di costellazioni immaginarie..." },
+  { id:8,  title:"ULTRSKY 08", description:"Specchi e cristalli riflettono galassie in miniatura..." },
+  { id:9,  title:"ULTRSKY 09", description:"Lampade al plasma pulsanti, simulazione di fulmini..." },
+  { id:10, title:"ULTRSKY 10",description:"Un viaggio nelle profondità di un buco nero..." },
+  { id:11, title:"ULTRSKY 11",description:"Trittico dell’alba su Marte, con sfumature ardenti..." },
+  { id:12, title:"ULTRSKY 12",description:"Metalli e resine fusi in pattern galattici iridescenti." },
+  { id:13, title:"ULTRSKY 13",description:"Scultura sonora di vibrazioni elettromagnetiche..." },
+  { id:14, title:"ULTRSKY 14",description:"Tessuto a fibre ottiche, muta colore in sincronia..." },
+  { id:15, title:"ULTRSKY 15",description:"Affresco stellare in cui costellazioni reali e figure mitologiche..." },
+  { id:16, title:"ULTRSKY 16",description:"Petali di fiori alieni sospesi, botaniche di mondi inesplorati." },
+  { id:17, title:"ULTRSKY 17",description:"Nastro LED che disegna orbite e loop, pulsando con..." },
+  { id:18, title:"ULTRSKY 18",description:"Meteorite in cornice di giada, testimone del tempo primordiale." },
+  { id:19, title:"ULTRSKY 19",description:"Proiezioni olografiche: evoluzione di galassie, dal Big Bang..." },
+  { id:20, title:"ULTRSKY 20",description:"Polittico monumentale, scene cosmiche e simboli alchemici..."}
+];
+
+const listContainer= document.getElementById('exhibition-list');
+
+/* Funzione toggleSpeak => alterna “Ascolta” / “Interrompi” */
+function toggleSpeak(button, text){
+  if(!('speechSynthesis' in window)){
+    alert("Sintesi vocale non supportata dal tuo browser!");
+    return;
+  }
+  // Se sta già parlando => Interrompi
+  if(button.dataset.speaking==="true"){
+    speechSynthesis.cancel(); // ferma l'audio
+    button.dataset.speaking="false";
+    button.textContent="Ascolta";
+  } else {
+    // avvia la sintesi
+    const utter=new SpeechSynthesisUtterance(text);
+    utter.lang="it-IT";
+    // quando finisce => reset
+    utter.onend=()=>{
+      button.dataset.speaking="false";
+      button.textContent="Ascolta";
+    };
+    // avvio
+    speechSynthesis.speak(utter);
+    button.dataset.speaking="true";
+    button.textContent="Interrompi";
+  }
+}
+
+pieces.forEach(p=>{
+  const card=document.createElement('div');
+  card.className='piece-card';
+
+  const h3=document.createElement('h3');
+  h3.className='piece-title';
+  h3.textContent=p.title;
+
+  const desc=document.createElement('div');
+  desc.className='piece-desc';
+  desc.textContent=p.description;
+
+  // Pulsante TTS con toggle
+  const speakBtn=document.createElement('button');
+  speakBtn.className='speak-btn';
+  speakBtn.textContent='Ascolta';
+  speakBtn.dataset.speaking="false"; // default
+
+  // Al click => toggleSpeak
+  speakBtn.addEventListener('click',(e)=>{
+    e.stopPropagation(); // per non triggerare il click della card
+    toggleSpeak(speakBtn, p.description);
+  });
+
+  // Se clic su card => open modal se hasExtended
+  card.addEventListener('click',()=>{
+    if(p.hasExtended){
+      closeAllModals();
+      document.getElementById('modal-ultrsky01-extended').classList.add('active');
+    }
+  });
+
+  card.appendChild(h3);
+  card.appendChild(desc);
+  card.appendChild(speakBtn);
+  listContainer.appendChild(card);
+});
+
+/* “Continua a leggere” / “Riduci testo” (ULTRSKY 01) */
+const readMoreBtn  = document.getElementById('read-more-btn');
+const hiddenContent= document.getElementById('hidden-content');
+const reduceBtn    = document.getElementById('reduce-btn');
+if(readMoreBtn){
+  readMoreBtn.addEventListener('click',()=>{
+    hiddenContent.style.display='block';
+    readMoreBtn.style.display='none';
+  });
+}
+if(reduceBtn){
+  reduceBtn.addEventListener('click',()=>{
+    hiddenContent.style.display='none';
+    readMoreBtn.style.display='inline';
+  });
+}
+
+/* IMMAGINE FULLSCREEN (ULTRSKY 01) */
+const ultrsky01Img= document.getElementById('ultrsky01-img');
+const imgModal    = document.getElementById('img-modal');
+const imgModalImg = document.getElementById('img-modal-img');
+if(ultrsky01Img){
+  ultrsky01Img.addEventListener('click',()=>{
+    imgModalImg.src= ultrsky01Img.src;
+    imgModal.classList.add('active');
+  });
+}
+if(imgModal){
+  imgModal.addEventListener('click',(e)=>{
+    if(e.target===imgModal){
+      imgModal.classList.remove('active');
+      imgModalImg.src="";
+    }
+  });
+}
+
+/* LIKE con limitazione (1) localStorage (ULTRSKY 01) */
+let likeCount=0;
+const likeBtn      = document.getElementById('like-btn');
+const likeCountSpan= document.getElementById('like-count');
+const liked        = localStorage.getItem('ultrsky01_liked'); 
+if(liked==='true'){
+  likeCount=1;
+  likeCountSpan.textContent=likeCount;
+  likeBtn.disabled=true;
+  likeBtn.textContent="Liked!";
+}
+if(likeBtn){
+  likeBtn.addEventListener('click',()=>{
+    if(!localStorage.getItem('ultrsky01_liked')){
+      likeCount++;
+      likeCountSpan.textContent=likeCount;
+      likeBtn.disabled=true;
+      likeBtn.textContent="Liked!";
+      localStorage.setItem('ultrsky01_liked','true');
+    }
+  });
+}
+
+/* SHARE su ULTRSKY 01 + popup */
+const shareBtn   = document.getElementById('share-btn');
+const sharePopup = document.getElementById('share-popup');
+// link fittizio
+const photoURL   = "https://mywebsite.com/foto-ultrsky01.jpg";
+
+if(shareBtn){
+  shareBtn.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    sharePopup.classList.toggle('active');
+  });
+}
+// Chiudi popup se clic altrove
+document.addEventListener('click',(e)=>{
+  if(sharePopup.classList.contains('active') && e.target!==shareBtn && !sharePopup.contains(e.target)){
+    sharePopup.classList.remove('active');
+  }
+});
+const shareIcons= document.querySelectorAll('.share-icon');
+shareIcons.forEach(icon=>{
+  icon.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    const social= icon.dataset.social;
+    let url="";
+    if(social==="facebook"){
+      url=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(photoURL)}`;
+    } else if(social==="x"){
+      url=`https://twitter.com/intent/tweet?url=${encodeURIComponent(photoURL)}`;
+    } else if(social==="instagram"){
+      url=`https://www.instagram.com/`;
+    }
+    window.open(url,"_blank");
+    sharePopup.classList.remove('active');
+  });
+});
+</script>
+</body>
+</html>
