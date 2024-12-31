@@ -7,7 +7,7 @@
   "theme_color": "#000",
   "icons": [
     {
-      "src": "icons/logo.png",
+      "src": "icons/scarabeo.png",
       "sizes": "150x150",
       "type": "image/png"
     }
