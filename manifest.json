@@ -14,16 +14,16 @@
   ],
   "description": "Weather forecast information",
   "screenshots": [
-    {
-    "src": "source/scarabeo.png",
-    "sizes": "150x150",
-    "type": "image/png",
-    "form_factor": "wide",
-    "label": "Home screen showing main navigation and featured content"
-  },
+   {
+      "src": "source/scarabeo.png",
+      "sizes": "485x1024",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "The About page shown on mobile."
+    },
     {
      "src": "source/scarabeo.png",
-      "sizes": "150x150",
+      "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Wonder Widgets"
