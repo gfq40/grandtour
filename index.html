@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+  <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+      .register('./sw.js') // percorso del tuo SW
+      .then(() => console.log('Service Worker registrato'))
+      .catch(err => console.error('SW registration failed:', err));
+    });
+  }
+  </script>
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#000000" />
   <meta charset="UTF-8">
