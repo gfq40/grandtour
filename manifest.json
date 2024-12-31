@@ -16,14 +16,14 @@
   "screenshots": [
     {
     "src": "source/scarabeo.png",
-    "sizes": "1280x720",
+    "sizes": "150x150",
     "type": "image/webp",
     "form_factor": "wide",
     "label": "Home screen showing main navigation and featured content"
   },
     {
      "src": "source/scarabeo.png",
-      "sizes": "640x320",
+      "sizes": "150x150",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Wonder Widgets"
