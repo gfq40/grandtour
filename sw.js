@@ -1,45 +1,51 @@
-const CACHE_NAME = 'ultrasky-cache-v1';
-const urlsToCache = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/main.js',
-  '/icons/logo.png',
-  '/icons/logo.png'
-];
-
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache);
-      })
-  );
+self.addEventListener("install", function(event) {
+  event.waitUntil(preLoad());
 });
 
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      })
-  );
+var preLoad = function(){
+  console.log("Installing web app");
+  return caches.open("offline").then(function(cache) {
+    console.log("caching index and important routes");
+    return cache.addAll(["/blog/", "/blog", "/", "/contact", "/resume", "/offline.html"]);
+  });
+};
+
+self.addEventListener("fetch", function(event) {
+  event.respondWith(checkResponse(event.request).catch(function() {
+    return returnFromCache(event.request);
+  }));
+  event.waitUntil(addToCache(event.request));
 });
 
-self.addEventListener('activate', event => {
-  const cacheWhitelist = [CACHE_NAME];
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
-});
+var checkResponse = function(request){
+  return new Promise(function(fulfill, reject) {
+    fetch(request).then(function(response){
+      if(response.status !== 404) {
+        fulfill(response);
+      } else {
+        reject();
+      }
+    }, reject);
+  });
+};
+
+var addToCache = function(request){
+  return caches.open("offline").then(function (cache) {
+    return fetch(request).then(function (response) {
+      console.log(response.url + " was cached");
+      return cache.put(request, response);
+    });
+  });
+};
+
+var returnFromCache = function(request){
+  return caches.open("offline").then(function (cache) {
+    return cache.match(request).then(function (matching) {
+     if(!matching || matching.status == 404) {
+       return cache.match("offline.html");
+     } else {
+       return matching;
+     }
+    });
+  });
+};
