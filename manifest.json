@@ -15,14 +15,14 @@
   "description": "Weather forecast information",
   "screenshots": [
     {
-    "src": "source/icons/scarabeo.png",
+    "src": "icons/scarabeo.png",
     "sizes": "1280x720",
     "type": "image/webp",
     "form_factor": "wide",
     "label": "Home screen showing main navigation and featured content"
   },
     {
-     "src": "source/icons/scarabeo.png",
+     "src": "icons/scarabeo.png",
       "sizes": "640x320",
       "type": "image/png",
       "form_factor": "android",
