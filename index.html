@@ -5,7 +5,7 @@
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker
-      .register('./sw.js') // percorso del tuo SW
+      .register('sw.js') // percorso del tuo SW
       .then(() => console.log('Service Worker registrato'))
       .catch(err => console.error('SW registration failed:', err));
     });
