@@ -751,5 +751,36 @@ shareIcons.forEach(icon=>{
     });
   }
 </script>
+<script>
+  let deferredPrompt; // memorizzeremo l’evento qui
+  const installBtn = document.getElementById('btn-install'); // tuo bottone “Installa”
+  installBtn.style.display = 'none'; // inizialmente nascosto
+
+  window.addEventListener('beforeinstallprompt', e => {
+    // Impedisce la mini-infobar
+    e.preventDefault();
+    deferredPrompt = e;
+    // Mostra il tuo bottone “Installa”
+    installBtn.style.display = 'inline-block';
+  });
+
+  installBtn.addEventListener('click', () => {
+    if(deferredPrompt){
+      // Mostra la prompt di install
+      deferredPrompt.prompt();
+      // Aspetta la scelta dell’utente
+      deferredPrompt.userChoice.then(choice => {
+        if(choice.outcome === 'accepted'){
+          console.log('PWA installata');
+        } else {
+          console.log('Installazione rifiutata');
+        }
+        // Reset
+        deferredPrompt = null;
+        installBtn.style.display = 'none';
+      });
+    }
+  });
+</script>
 </body>
 </html>
