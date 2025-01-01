@@ -1,6 +1,6 @@
 {
-  "name": "grandtour",
-  "short_name": "grandtour",
+  "name": "Ultrasky - Priverno",
+  "short_name": "Ultrasky",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#000",
@@ -10,23 +10,11 @@
       "src": "icons/scarabeo.png",
       "sizes": "150x150",
       "type": "image/png"
-    }
-  ],
-  "description": "Weather forecast information",
-  "screenshots": [
-   {
-      "src": "icons/scarabeo.png",
-      "sizes": "485x1024",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "The About page shown on mobile."
     },
     {
-     "src": "icons/scarabeo.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "Wonder Widgets"
+      "src": "icons/scarabeo.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
-]
+  ]
 }
