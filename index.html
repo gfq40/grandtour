@@ -8,6 +8,7 @@
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" />
+  <link rel="manifest" href="manifest.json" />
 
   <style>
     :root {
@@ -914,6 +915,16 @@ function init(){
   updateLanguage("it");
 }
 init();
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('./sw.js')
+        .then(() => console.log('Service Worker registered'))
+        .catch(err => console.error('Service Worker registration failed:', err));
+    });
+  }
 </script>
 </body>
 </html>
