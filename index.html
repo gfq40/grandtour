@@ -2,19 +2,20 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>ULTRSKY - PRIVERNO</title>
+  <title>ULTRASKY - PRIVERNO (Super WOW)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" />
-  <link rel="manifest" href="manifest.json" />
+  <link 
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap"
+  />
 
-  
   <style>
     :root {
       --color-bg-start: #06121f;
-      --color-bg-end:   #0f1c2d; 
+      --color-bg-end:   #0f1c2d;
       --color-bg-header: rgba(0,0,0,0.7);
 
       --color-text-main: #ddd;
@@ -28,20 +29,230 @@
       --modal-border:        #3B6CB7;
 
       --transition-speed: 0.4s;
+
+      /* Tema chiaro (opzionale) */
+      --color-bg-start-light: #f2f5f9;
+      --color-bg-end-light:   #dfe3e6;
+      --color-text-main-light: #111;
+      --color-card-bg-light: #fff;
     }
+
+    /* Tema Chiaro/Scuro */
+    body.light-mode {
+      background: linear-gradient(to bottom, var(--color-bg-start-light), var(--color-bg-end-light));
+      color: var(--color-text-main-light);
+    }
+    body.light-mode header,
+    body.light-mode .bottom-bar {
+      background: rgba(255,255,255,0.9);
+    }
+    body.light-mode .logo,
+    body.light-mode .hamburger-icon div {
+      filter: brightness(0.75);
+    }
+    body.light-mode .menu-container {
+      background: rgba(255,255,255,0.8);
+      color: #111;
+    }
+    body.light-mode .piece-card {
+      background: var(--color-card-bg-light);
+      border-color: var(--color-border);
+    }
+
+    /******************************************************/
+    /*                 MODALITÀ RAGAZZI                   */
+    /*         Effetti SUPER WOW con arcobaleno,          */
+    /*      bolle, fuochi d’artificio e testo neon        */
+    /******************************************************/
+    body.kid-mode {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: #333 !important;
+
+      /* Sfondo arcobaleno in movimento */
+      background: linear-gradient(
+        270deg,
+        #ff6f61,
+        #ffd45a,
+        #f2ec57,
+        #98f2a3,
+        #8deaff,
+        #cea8ff,
+        #ff6fed
+      );
+      background-size: 1400% 1400%;
+      animation: rainbowFlow 16s ease infinite;
+
+      /* Cursor personalizzato */
+      cursor: url('https://raw.githubusercontent.com/gfq40/ultrasky/main/icons/star-cursor.png'), auto;
+      transition: background var(--transition-speed), color var(--transition-speed);
+    }
+    @keyframes rainbowFlow {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* TEXT NEON (di esempio) */
+    .neon-title {
+      color: #fff;
+      font-size: 2rem;
+      text-shadow: 0 0 10px #fff, 0 0 20px #f0f, 0 0 30px #f0f;
+      animation: flicker 3s infinite;
+    }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      10%      { opacity: 0.8; }
+      22%      { text-shadow: 0 0 20px #ff4646; }
+      28%      { text-shadow: 0 0 30px #fff; }
+    }
+
+    /* Bolle in movimento (dietro ai contenuti) */
+    .bubbles-container {
+      position: fixed;
+      bottom: 0; 
+      left: 0;
+      width: 100%; 
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 50%;
+      animation: rise 8s infinite ease-in-out;
+    }
+    @keyframes rise {
+      0%   { transform: translateY(0) scale(1); opacity:1; }
+      80%  { opacity:1; }
+      100% { transform: translateY(-110vh) scale(0.7); opacity:0; }
+    }
+
+    /* Animazioni su card & pulsanti in kid-mode */
+    body.kid-mode .piece-card {
+      background: #fffdea !important;
+      border: 3px dashed #ff6f61 !important;
+    }
+
+    /******************************************************/
+    /*   FUOCHI D’ARTIFICIO container + animazione         */
+    /******************************************************/
+    .fireworks-container {
+      position: fixed;
+      top: 0; 
+      left: 0;
+      width: 100%; 
+      height: 100%;
+      pointer-events: none;
+      z-index: 99999;
+    }
+    .firework {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: transparent;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      animation: explode 1s ease-out forwards;
+      opacity: 0;
+    }
+    @keyframes explode {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(2);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(3);
+        opacity: 0;
+      }
+    }
+
+    /******************************************************/
+
     * {
       margin:0; 
       padding:0; 
       box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
     }
     html, body {
       width:100%; 
       height:100%;
-      font-family:'Poppins', sans-serif;
       background: linear-gradient(to bottom, var(--color-bg-start), var(--color-bg-end));
       color: var(--color-text-main);
       overflow-x:hidden;
       transition: background var(--transition-speed), color var(--transition-speed);
+    }
+
+    /* Parallax Container (sfondo stellare) */
+    .parallax {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://raw.githubusercontent.com/gfq40/ultrasky/main/img/stars-bg.jpg') repeat center center;
+      background-size: cover;
+      z-index: -2;
+      animation: moveStars 50s linear infinite;
+    }
+    @keyframes moveStars {
+      0% { background-position: 0 0; }
+      100% { background-position: 2000px 2000px; }
+    }
+
+    /* OVERLAY SCELTA MODALITÀ */
+    #mode-selection-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; 
+      height: 100vh;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 999999;
+      text-align: center;
+      color: #fff;
+      animation: fadeIn var(--transition-speed) ease forwards;
+    }
+    #mode-selection-overlay h2 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      text-shadow: 0 0 8px rgba(255,255,255,0.2);
+    }
+    #mode-selection-overlay p {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      max-width: 300px;
+    }
+    #mode-selection-overlay button {
+      margin: 5px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 30px;
+      background: var(--color-title-blu);
+      color: #fff;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    #mode-selection-overlay button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    @keyframes fadeIn {
+      0% { opacity:0; transform:scale(0.95); }
+      100%{ opacity:1; transform:scale(1); }
     }
 
     /* HEADER */
@@ -57,6 +268,7 @@
       z-index:9999;
       background: var(--color-bg-header);
       box-shadow:0 2px 8px rgba(0,0,0,0.6);
+      transition: background var(--transition-speed);
     }
     #header-left {
       display:flex;
@@ -66,13 +278,16 @@
     .logo {
       height:40px; 
       width:auto;
+      transition: filter 0.3s;
     }
     #header-title {
       font-weight:600;
       font-size:1.2rem;
-      color: var(--color-title-blu);
-      text-transform: uppercase;
+      background: linear-gradient(90deg, #00f0ff, #3B6CB7, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       letter-spacing:1px;
+      text-transform: uppercase;
     }
 
     /* HAMBURGER lines in ORO */
@@ -105,10 +320,6 @@
       box-shadow:0 4px 15px rgba(0,0,0,0.7);
       animation: fadeIn var(--transition-speed) ease;
     }
-    @keyframes fadeIn {
-      from { opacity:0; transform:scale(0.95);}
-      to   { opacity:1; transform:scale(1);}
-    }
     .menu-list {
       list-style:none;
       margin:0; 
@@ -123,8 +334,8 @@
       border-radius:5px;
       padding:8px;
       text-align:center;
-      transition: background 0.3s, border 0.3s;
       cursor:pointer;
+      transition: all 0.3s;
     }
     .menu-list li:hover {
       background:rgba(255,255,255,0.07);
@@ -160,6 +371,7 @@
       font-size:1.4rem;
       font-weight:600;
       margin-bottom:8px;
+      transition: color 0.3s;
     }
     .intro p {
       max-width:600px;
@@ -167,14 +379,41 @@
       line-height:1.5;
     }
 
+    /* BOTTONE TORNA ALLA SCELTA */
+    #btn-back-selection {
+      display:none;
+      margin-top:15px; 
+      background:var(--color-border); 
+      border:1px solid var(--color-border); 
+      border-radius:20px; 
+      padding:8px 16px; 
+      color:#fff;
+      cursor:pointer;
+      transition:transform 0.2s;
+    }
+    #btn-back-selection:hover {
+      transform:scale(1.05);
+      box-shadow:0 4px 10px rgba(0,0,0,0.3);
+    }
+
     /* ULTRSKY 20 SCHEDE */
+    .exhibition-intro {
+      text-align: center;
+      margin-top: 40px; 
+      margin-bottom: 10px; 
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
     .exhibition-list {
-      display:flex;
+      display:none; 
       flex-wrap:wrap;
       gap:25px;
       justify-content:center;
       margin-top:30px;
     }
+
+    /* 3D tilt e glow (di base) */
     .piece-card {
       background: var(--color-card-bg);
       border:1px solid var(--color-border);
@@ -184,10 +423,12 @@
       cursor:pointer;
       transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
       box-shadow:0 2px 8px rgba(0,0,0,0.4);
+      position: relative;
+      perspective: 800px;
     }
     .piece-card:hover {
-      transform:scale(1.02);
-      box-shadow:0 5px 15px rgba(0,0,0,0.6);
+      transform: translateZ(10px) rotateX(4deg) rotateY(-4deg) scale(1.04);
+      box-shadow:0 8px 20px rgba(0,0,0,0.6);
       border-color: var(--color-border-hover);
     }
     .piece-title {
@@ -195,12 +436,12 @@
       font-weight:600;
       margin-bottom:6px;
       color: var(--color-gold);
+      text-shadow: 0 0 4px rgba(255,255,255,0.1);
     }
     .piece-desc {
       font-size:0.85rem;
       line-height:1.3;
       margin-bottom:10px;
-      color: var(--color-text-main);
     }
     .speak-btn {
       background: var(--color-border);
@@ -233,6 +474,7 @@
       z-index:9999;
       color: var(--color-text-main);
       font-size:0.85rem;
+      transition: background var(--transition-speed);
     }
 
     /* ARTISTI */
@@ -250,6 +492,7 @@
     .artist-card {
       width:150px;
       cursor:pointer;
+      transition: transform 0.3s;
     }
     .artist-card img {
       width:150px; 
@@ -277,12 +520,59 @@
       color: var(--color-text-main);
       cursor:pointer;
       transition:transform 0.2s;
+      font-size:1rem; 
     }
     .back-btn:hover {
       transform:scale(1.05);
     }
 
-    /* MODALS */
+    /* GIOCHI RAGAZZI */
+    #kids-game-section {
+      display:none;
+      text-align:center;
+      margin-top:30px;
+    }
+    #kids-game-section h2 {
+      margin-top: 80px; 
+      margin-bottom: 10px;
+    }
+    .games-btns {
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      margin-bottom:20px;
+      margin-top:12px;
+    }
+    .games-btns button {
+      background: var(--color-border);
+      border:1px solid var(--color-border);
+      border-radius:20px;
+      padding:8px 16px;
+      color: #fff;
+      font-size:0.875rem;
+      cursor:pointer;
+      transition:transform 0.2s, box-shadow 0.2s;
+    }
+    .games-btns button:hover {
+      transform:scale(1.05);
+      box-shadow:0 3px 8px rgba(0,0,0,0.4);
+    }
+    .game-area {
+      display:none; 
+      margin-top:10px;
+      background: var(--color-card-bg);
+      border:1px solid var(--color-border);
+      border-radius:8px;
+      padding:16px;
+      max-width:600px;
+      margin:0 auto;
+      line-height:1.4;
+      text-align:left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* MODALS (stesso impianto) */
     .modal-overlay {
       position:fixed;
       top:0; left:0;
@@ -309,6 +599,7 @@
       position:relative;
       color:var(--color-text-main);
       box-shadow:0 2px 20px rgba(0,0,0,0.8);
+      animation: fadeIn var(--transition-speed) ease;
     }
     .modal-content h2 {
       margin-bottom:10px;
@@ -363,6 +654,18 @@
       box-shadow:0 4px 20px rgba(0,0,0,0.9);
     }
 
+    /* MODAL MENU INFO */
+    #menu-info-modal {
+      display:none;
+    }
+    #menu-info-modal.active {
+      display:flex;
+    }
+    #menu-info-modal .modal-content {
+      max-width:600px;
+      position:relative;
+    }
+
     /* ULTRSKY 01 EXTENDED */
     #modal-ultrsky01-extended .like-share-container {
       margin-top:10px;
@@ -397,6 +700,7 @@
       flex-direction:row;
       gap:5px;
       z-index:2000;
+      animation: fadeIn 0.3s ease;
     }
     .share-popup.active {
       display:flex;
@@ -407,45 +711,195 @@
       background:#fff; 
       border-radius:4px;
       cursor:pointer;
+      transition: transform 0.3s;
+    }
+    .share-icon:hover {
+      transform: scale(1.15);
     }
 
     /* Testo corto + lungo */
     #ultrsky01-short { margin-bottom:10px; white-space:pre-wrap; }
     #ultrsky01-full  { display:none; margin-top:10px; white-space:pre-wrap; }
 
+    /* Animazione “bump” su lettura audio */
+    .speak-btn[data-playing="true"] {
+      animation: bump 0.6s infinite alternate;
+    }
+    @keyframes bump {
+      0%   { transform: scale(1); }
+      100% { transform: scale(1.08); }
+    }
+
+    /* ALCUNI STILI SPECIFICI PER GIOCO "PLINIO" */
+    .plinio-title {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #FF5722;
+      text-shadow: 2px 2px 4px rgba(255, 87, 34, 0.3);
+      font-size:1.3rem;
+      font-weight:600;
+    }
+    .plinio-intro {
+      margin-bottom: 10px;
+      text-align: center;
+      color: #ccc;
+      line-height: 1.4;
+      font-size:0.9rem;
+    }
+    .plinio-color-box {
+      width: 120px;
+      height: 120px;
+      margin: 10px auto;
+      border: 2px solid var(--color-border);
+      border-radius:10px;
+      transition: background-color 0.6s ease, box-shadow 0.3s ease;
+    }
+    .plinio-footer {
+      text-align:center; 
+      font-size:0.9rem; 
+      color:#bbb; 
+      margin-top:20px;
+    }
+
+    /***************************
+     * EFFETTO CONFETTI
+     ***************************/
+    .confetti-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 999999;
+    }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #ffd700;
+      animation: confetti-fall 2.5s linear infinite;
+      opacity: 0;
+    }
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(600px) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* CLASSI GENERICHE PER I PULSANTI ICONA */
+    .icon-btn {
+      background: var(--color-border);
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      width: 40px; 
+      height: 40px; 
+      cursor: pointer;
+      margin-left: 10px;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+    }
+    .icon-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* ============================================================
+       Nuova regola per forzare il testo bianco nel menu hamburger 
+       in modalità ragazzi (kid-mode)
+       ============================================================ */
+    body.kid-mode .menu-container,
+    body.kid-mode .menu-container li {
+      color: #fff !important;
+    }
   </style>
 </head>
 <body>
+
+<!-- PARALLAX STELLARE -->
+<div class="parallax"></div>
+
+<!-- BOLLE in movimento (dietro ai contenuti) -->
+<div class="bubbles-container" id="bubbles-container">
+  <span class="bubble"></span>
+  <span class="bubble"></span>
+  <span class="bubble"></span>
+  <span class="bubble"></span>
+  <span class="bubble"></span>
+  <span class="bubble"></span>
+  <span class="bubble"></span>
+  <span class="bubble"></span>
+  <span class="bubble"></span>
+  <span class="bubble"></span>
+</div>
+
+<!-- FUOCHI D’ARTIFICIO -->
+<div class="fireworks-container" id="fireworks-container"></div>
+
+<!-- OVERLAY SCELTA MODALITÀ -->
+<div id="mode-selection-overlay">
+  <h2>Benvenuto a ULTRSKY!</h2>
+  <p>Scegli la versione che preferisci per esplorare la mostra:</p>
+  <button id="btn-mode-kid">Modalità Ragazzi</button>
+  <button id="btn-mode-adult">Modalità Adulti</button>
+</div>
 
 <header>
   <div id="header-left">
     <img 
       src="https://www.ultrasky.it/news/wp-content/uploads/2024/11/loghino-scarabeo-80.png"
-      alt="Ultrasky Logo"
+      alt="Logo Ultrasky"
       class="logo"
     >
     <div id="header-title">ULTRSKY - PRIVERNO</div>
   </div>
 
-  <div class="hamburger-icon" id="hamburger-btn">
+  <!-- HAMBURGER -->
+  <div 
+    class="hamburger-icon" 
+    id="hamburger-btn"
+    role="button"
+    aria-label="Apri il menu di navigazione"
+    tabindex="0"
+  >
     <div></div>
     <div></div>
     <div></div>
   </div>
+
   <div class="menu-container" id="hamburger-menu">
     <ul class="menu-list">
-      <li>Alla scoperta del Blu Egizio</li>
-      <li>La Storia</li>
-      <li>La Scienza</li>
-      <li>Le Arti</li>
-      <li>Programma</li>
+      <li id="menu-blu-egizio">Alla scoperta del Blu Egizio</li>
+      <li id="menu-storia">La Storia</li>
+      <li id="menu-scienza">La Scienza</li>
+      <li id="menu-arti">Le Arti</li>
+      <li id="menu-programma">Programma</li>
       <li id="btn-artisti">Artisti</li>
-      <li>Contatti</li>
-      <li>Catalogo Digitale</li>
-      <li>Crediti</li>
+      <li id="menu-contatti">Contatti</li>
+      <li id="menu-catalogo-digitale">Catalogo Digitale</li>
+      <li id="menu-crediti">Crediti</li>
+      <li id="btn-change-mode">Cambia Modalità</li>
       <li id="btn-language">Lingua (IT/EN)</li>
     </ul>
   </div>
+
+  <!-- Pulsante Tema (sole/luna) -->
+  <button 
+    id="theme-toggle"
+    class="icon-btn"
+    aria-label="Toggle Tema Chiaro/Scuro"
+  >
+    ☀️
+  </button>
 </header>
 
 <main>
@@ -453,9 +907,13 @@
   <section class="intro" id="section-home">
     <h2 id="welcome-title">Benvenuti in Ultrasky</h2>
     <p id="welcome-desc">Scopri la mostra dedicata al Blu Egizio ...</p>
+
+    <button id="btn-back-selection">Torna alla Scelta</button>
+    <!-- Il pulsante "Gioca con il Blu Egizio" è stato rimosso -->
   </section>
 
   <!-- ULTRSKY 20 SCHEDE -->
+  <h2 class="exhibition-intro neon-title">Segui il percorso museale</h2>
   <section>
     <div class="exhibition-list" id="exhibition-list"></div>
   </section>
@@ -463,8 +921,210 @@
   <!-- ARTISTI -->
   <section id="artists-section">
     <h3 style="text-align:center; margin-bottom:10px;">Artisti</h3>
-    <button class="back-btn" id="back-artists">Torna Indietro</button>
+    <button class="back-btn" id="back-artisti">Torna Indietro</button>
     <div class="artists-grid" id="artists-grid"></div>
+  </section>
+
+  <!-- GIOCHI RAGAZZI -->
+  <section id="kids-game-section" style="display:none; text-align:center; margin-top:30px;">
+    <h2>Gioca con il Blu Egizio</h2>
+    <p>Scegli uno dei minigiochi per divertirti imparando!</p>
+
+    <button class="back-btn" id="btn-back-kids-home">Torna alla Home</button>
+
+    <div class="games-btns">
+      <button id="btn-plinio">Plinio</button>
+      <button id="btn-chimico">Piccolo Chimico</button>
+    </div>
+
+    <!-- PLINIO -->
+    <div class="game-area" id="game-plinio">
+      <h3 class="plinio-title">Piccoli Pigmenti Magici</h3>
+      <p class="plinio-intro">
+        Ciao, io sono <strong>Plinio</strong>!<br>
+        Aiutami a mescolare i colori per ricreare uno dei grandi <br>
+        pigmenti dell’antichità:
+      </p>
+
+      <p id="scoreDisplay" style="text-align:center; font-size:0.95rem; color:#ccc; margin-bottom:6px;"></p>
+
+      <!-- COLORE BERSAGLIO -->
+      <div class="plinio-color-box" id="targetColor"></div>
+      <p id="targetColorCode" style="text-align:center; font-size:0.85rem;"></p>
+      <p style="text-align:center; font-size:0.8rem; color:#999;" id="targetColorInfo"></p>
+
+      <!-- SLIDER CONTROLS -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:15px; margin:15px 0;">
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <label for="redRange" style="margin-bottom:5px; font-weight:600;">Rosso</label>
+          <input 
+            type="range" 
+            id="redRange" 
+            min="0" 
+            max="255" 
+            value="0" 
+            oninput="updateUserColorPlinio()"
+            style="width:220px;"
+          >
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <label for="greenRange" style="margin-bottom:5px; font-weight:600;">Giallo</label>
+          <input 
+            type="range" 
+            id="greenRange" 
+            min="0" 
+            max="255" 
+            value="0" 
+            oninput="updateUserColorPlinio()"
+            style="width:220px;"
+          >
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <label for="blueRange" style="margin-bottom:5px; font-weight:600;">Blu</label>
+          <input 
+            type="range" 
+            id="blueRange" 
+            min="0" 
+            max="255" 
+            value="0" 
+            oninput="updateUserColorPlinio()"
+            style="width:220px;"
+          >
+        </div>
+      </div>
+
+      <!-- COLORE DELL’UTENTE -->
+      <div class="plinio-color-box" id="userColor"></div>
+      <p id="userColorCode" style="text-align:center; font-size:0.85rem;"></p>
+
+      <!-- PULSANTE VERIFICA -->
+      <button 
+        onclick="checkColorMatch()"
+        style="background: var(--color-border); border:1px solid var(--color-border); border-radius:20px; padding:8px 16px; color:#fff; cursor:pointer; transition:transform 0.2s; margin-top:15px;"
+      >
+        Verifica il colore!
+      </button>
+      <div id="resultMessage" style="text-align:center; margin-top:10px; font-size:0.95rem; min-height:24px;"></div>
+
+      <!-- PULSANTE NUOVO COLORE -->
+      <button 
+        onclick="generateTargetColor()"
+        style="background: var(--color-border); border:1px solid var(--color-border); border-radius:20px; padding:8px 16px; color:#fff; cursor:pointer; transition:transform 0.2s; margin-top:15px;"
+      >
+        Nuovo Pigmento Antico
+      </button>
+
+      <p class="plinio-footer">
+        Continua a sperimentare e impara nuovi segreti dell’arte e dei pigmenti!
+      </p>
+
+      <button class="btn-back" id="btn-back-plinio" style="margin-top:20px;">
+        Torna ai Giochi
+      </button>
+      
+      <!-- Contenitore confetti -->
+      <div class="confetti-container" id="confetti-container-plinio"></div>
+    </div>
+
+    <!-- PICCOLO CHIMICO -->
+    <div class="game-area" id="game-chimico">
+      <h3>Piccolo Chimico: Blu Egizio</h3>
+      <p style="line-height:1.4;">
+        Sei un apprendista chimico nell’antico Egitto!  
+        Aggiungi le <strong>giuste proporzioni</strong> di Silice, Rame, Calcio e Fondente 
+        per creare il prezioso Blu Egizio.
+      </p>
+
+      <!-- Riquadro del risultato -->
+      <div 
+        class="color-box" 
+        id="resultColor" 
+        style="width:120px; height:120px; margin:10px auto; border:2px solid var(--color-border); border-radius:8px; transition: background-color 0.6s ease, box-shadow 0.3s ease;"
+      >
+      </div>
+
+      <p id="ratioMessage" style="margin-top:5px; font-size:0.9rem;"></p>
+
+      <!-- Curiosità storica -->
+      <p style="font-size:0.85rem; color:var(--color-text-main); margin:10px auto; max-width:480px;">
+        Il Blu Egizio si ottiene riscaldando una miscela di sabbia (silice), rame, calcare (fonte di calcio) 
+        e un fondente, generalmente il natron. Fu uno dei primi pigmenti sintetici della storia, 
+        noto già dal 2500 a.C.!
+      </p>
+
+      <!-- Sliders per i 4 componenti -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:15px; margin:20px 0;">
+        <div class="slider-group" style="display:flex; flex-direction:column; align-items:center;">
+          <label for="siliceRange" style="margin-bottom:5px; font-weight:600;">Silice (SiO₂)</label>
+          <input 
+            type="range" 
+            id="siliceRange" 
+            min="0" 
+            max="100" 
+            value="0" 
+            oninput="updateResultMix()"
+            style="width:220px;"
+          >
+        </div>
+        <div class="slider-group" style="display:flex; flex-direction:column; align-items:center;">
+          <label for="rameRange" style="margin-bottom:5px; font-weight:600;">Rame (Cu)</label>
+          <input 
+            type="range" 
+            id="rameRange" 
+            min="0" 
+            max="100" 
+            value="0" 
+            oninput="updateResultMix()"
+            style="width:220px;"
+          >
+        </div>
+        <div class="slider-group" style="display:flex; flex-direction:column; align-items:center;">
+          <label for="calcioRange" style="margin-bottom:5px; font-weight:600;">Calcio (Ca)</label>
+          <input 
+            type="range" 
+            id="calcioRange" 
+            min="0" 
+            max="100" 
+            value="0" 
+            oninput="updateResultMix()"
+            style="width:220px;"
+          >
+        </div>
+        <div class="slider-group" style="display:flex; flex-direction:column; align-items:center;">
+          <label for="fondenteRange" style="margin-bottom:5px; font-weight:600;">Fondente (Natron)</label>
+          <input 
+            type="range" 
+            id="fondenteRange" 
+            min="0" 
+            max="100" 
+            value="0" 
+            oninput="updateResultMix()"
+            style="width:220px;"
+          >
+        </div>
+      </div>
+
+      <!-- Pulsante: verifica il mix -->
+      <button 
+        onclick="checkRecipe()"
+        style="background: var(--color-border); border:1px solid var(--color-border); border-radius:20px; padding:8px 16px; color:#fff; cursor:pointer; transition:transform 0.2s;"
+      >
+        Crea il Blu Egizio!
+      </button>
+
+      <div id="resultMessage" style="min-height:24px; margin-top:15px; font-size:1rem;"></div>
+
+      <p style="font-size:0.9rem; color:var(--color-text-main); margin-top:20px;">
+        Riuscirai a trovare la formula perfetta per il glorioso pigmento dell’antichità?
+      </p>
+
+      <button class="btn-back" id="btn-back-chimico" style="margin-top:20px;">
+        Torna ai Giochi
+      </button>
+
+      <!-- Contenitore confetti -->
+      <div class="confetti-container" id="confetti-container-chimico"></div>
+    </div>
   </section>
 </main>
 
@@ -487,15 +1147,12 @@
     <button class="modal-close" data-close="modal-ultrsky01-extended">X</button>
     <h2 id="ultrsky01-title">ULTRSKY 01 - Approfondimento</h2>
 
-    <!-- Testo corto -->
     <div id="ultrsky01-short"></div>
     <button class="read-more-btn" id="read-more-btn" style="margin-bottom:10px; display:none;">Continua a leggere</button>
 
-    <!-- Testo completo -->
     <div id="ultrsky01-full"></div>
     <button class="read-more-btn" id="reduce-btn" style="display:none; margin-top:10px;">Riduci testo</button>
 
-    <!-- IMMAGINE cliccabile -->
     <img 
       id="ultrsky01-img"
       src="https://64.media.tumblr.com/1c6a8f123b3ecfe43ea74cbe4fe0b8aa/tumblr_o3me1uDL8i1qdh7ndo1_540.jpg"
@@ -503,7 +1160,6 @@
       style="cursor:pointer; margin-top:10px;"
     >
 
-    <!-- LIKE & SHARE -->
     <div class="like-share-container">
       <button class="like-btn" id="like-btn">Like</button>
       <span id="like-count">0</span>
@@ -518,7 +1174,6 @@
       </div>
     </div>
 
-    <!-- Video -->
     <div style="position:relative; padding-top:56.25%; margin-top:10px;">
       <iframe 
         src="https://www.youtube.com/embed/vJsiPNdQCzk"
@@ -535,235 +1190,352 @@
   <img id="img-modal-img" src="" alt="fullscreen">
 </div>
 
+<!-- MODAL MENU INFO -->
+<div class="modal-overlay" id="menu-info-modal">
+  <div class="modal-content" style="max-width:600px; position:relative;">
+    <button class="modal-close" data-close="menu-info-modal">X</button>
+    <h2 id="menu-info-title"></h2>
+    <div id="menu-info-body" style="white-space:pre-wrap; line-height:1.4;"></div>
+  </div>
+</div>
+
 <script>
-/***********************
- * MENU HAMBURGER
- ***********************/
-const hamburgerBtn=document.getElementById('hamburger-btn');
-const hamburgerMenu=document.getElementById('hamburger-menu');
-hamburgerBtn.addEventListener('click',()=>{
+/***********************/
+/*   SCELTA MODALITÀ   */
+/***********************/
+let isKidMode = false;
+const modeSelectionOverlay = document.getElementById('mode-selection-overlay');
+const btnModeKid   = document.getElementById('btn-mode-kid');
+const btnModeAdult = document.getElementById('btn-mode-adult');
+
+btnModeKid.addEventListener('click', () => {
+  isKidMode = true;
+  modeSelectionOverlay.style.display = 'none';
+  updateLanguage("kid");
+  startApp();
+});
+btnModeAdult.addEventListener('click', () => {
+  isKidMode = false;
+  modeSelectionOverlay.style.display = 'none';
+  updateLanguage("it");  // default
+  startApp();
+});
+
+/***********************/
+/*   AREE GIOCHI       */
+/***********************/
+const kidsGameSection = document.getElementById('kids-game-section');
+const gamePlinio      = document.getElementById('game-plinio');
+const gameChimico     = document.getElementById('game-chimico');
+
+/* PULSANTE “TORNA ALLA SCELTA” */
+const btnBackSelection = document.getElementById('btn-back-selection');
+btnBackSelection.addEventListener('click', ()=>{
+  document.body.classList.remove('menu-open');
+  homeSection.style.display='none';
+  exhibitionListEl.style.display='none';
+  kidsGameSection.style.display='none';
+  artistsSection.style.display='none';
+  modeSelectionOverlay.style.display='flex';
+});
+
+/***********************/
+/*   MENU HAMBURGER    */
+/***********************/
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const hamburgerMenu = document.getElementById('hamburger-menu');
+hamburgerBtn.addEventListener('click', () => {
   document.body.classList.toggle('menu-open');
 });
 
-/***********************
- * CHIUSURA MODALS
- ***********************/
-const closeBtns=document.querySelectorAll('.modal-close');
-closeBtns.forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const targ=btn.dataset.close;
+/***********************/
+/*   CAMBIO MODALITÀ   */
+/***********************/
+document.getElementById('btn-change-mode').addEventListener('click', () => {
+  document.body.classList.remove('menu-open');
+  hideAllSections();
+  modeSelectionOverlay.style.display='flex';
+});
+
+/***********************/
+/*   CHIUSURA MODALS   */
+/***********************/
+const closeBtns = document.querySelectorAll('.modal-close');
+closeBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const targ = btn.dataset.close;
     document.getElementById(targ).classList.remove('active');
   });
 });
 function closeAllModals(){
-  document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('active'));
+  document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
 }
 
-/***********************
- * IMG FULLSCREEN
- ***********************/
-const imgModal=document.getElementById('img-modal');
-const imgModalImg=document.getElementById('img-modal-img');
-const ultrsky01Img=document.getElementById('ultrsky01-img');
+/***********************/
+/*   IMG FULLSCREEN    */
+/***********************/
+const imgModal = document.getElementById('img-modal');
+const imgModalImg = document.getElementById('img-modal-img');
+const ultrsky01Img = document.getElementById('ultrsky01-img');
 if(ultrsky01Img){
-  ultrsky01Img.addEventListener('click',()=>{
-    imgModalImg.src=ultrsky01Img.src;
+  ultrsky01Img.addEventListener('click', () => {
+    imgModalImg.src = ultrsky01Img.src;
     imgModal.classList.add('active');
   });
 }
 if(imgModal){
-  imgModal.addEventListener('click',(e)=>{
-    if(e.target===imgModal){
+  imgModal.addEventListener('click', (e) => {
+    if(e.target === imgModal){
       imgModal.classList.remove('active');
-      imgModalImg.src="";
+      imgModalImg.src = "";
     }
   });
 }
 
-/***********************
- * SEZIONI
- ***********************/
-const homeSection=document.getElementById('section-home');
-const ultrskyList=document.getElementById('exhibition-list');
-const artistsSection=document.getElementById('artists-section');
+/***********************/
+/*   SEZIONI           */
+/***********************/
+const homeSection   = document.getElementById('section-home');
+const exhibitionListEl = document.getElementById('exhibition-list');
+const artistsSection= document.getElementById('artists-section');
 
 function hideAllSections(){
   homeSection.style.display='none';
-  ultrskyList.style.display='none';
+  exhibitionListEl.style.display='none';
   artistsSection.style.display='none';
+  kidsGameSection.style.display='none';
 }
 
 // ARTISTI
-document.getElementById('btn-artisti').addEventListener('click',()=>{
+const btnArtisti = document.getElementById('btn-artisti');
+btnArtisti.addEventListener('click', () => {
   hideAllSections();
   artistsSection.style.display='block';
   document.body.classList.remove('menu-open');
 });
-document.getElementById('back-artists').addEventListener('click',()=>{
+document.getElementById('back-artisti').addEventListener('click', () => {
   artistsSection.style.display='none';
   homeSection.style.display='block';
-  ultrskyList.style.display='flex';
+  exhibitionListEl.style.display='flex'; 
 });
 
-/***********************
- * LINGUA
- ***********************/
-let currentLang="it";
-function updateLanguage(lang){
-  currentLang=lang;
-
-  if(lang==="it"){
-    document.getElementById('welcome-title').textContent="Benvenuti in Ultrasky";
-    document.getElementById('welcome-desc').textContent="Scopri la mostra dedicata al Blu Egizio ...";
-    document.getElementById('ultrsky01-title').textContent="ULTRSKY 01 - Approfondimento";
-    document.getElementById('like-btn').textContent="Like";
-    document.getElementById('share-btn').textContent="Condividi";
-    document.getElementById('read-more-btn').textContent="Continua a leggere";
-    document.getElementById('reduce-btn').textContent="Riduci testo";
-  } else {
-    document.getElementById('welcome-title').textContent="Welcome to Ultrasky";
-    document.getElementById('welcome-desc').textContent="Discover the exhibition dedicated to Egyptian Blue ...";
-    document.getElementById('ultrsky01-title').textContent="ULTRSKY 01 - Insights";
-    document.getElementById('like-btn').textContent="Like";
-    document.getElementById('share-btn').textContent="Share";
-    document.getElementById('read-more-btn').textContent="Read more";
-    document.getElementById('reduce-btn').textContent="Reduce text";
+/***********************/
+/*   TRADUZIONI        */
+/***********************/
+let currentLang = "it";
+const translations = {
+  it: {
+    welcomeTitle: "Benvenuti in Ultrasky",
+    welcomeDesc: "Scopri la mostra dedicata al Blu Egizio ...",
+    ultrsky01Title: "ULTRSKY 01 - Approfondimento",
+    likeBtn: "Like",
+    shareBtn: "Condividi",
+    readMore: "Continua a leggere",
+    reduceText: "Riduci testo",
+    speakBtn: "Ascolta",
+    playBtn: "Gioca con il Blu Egizio"
+  },
+  en: {
+    welcomeTitle: "Welcome to Ultrasky",
+    welcomeDesc: "Discover the exhibition dedicated to Egyptian Blue ...",
+    ultrsky01Title: "ULTRSKY 01 - Insights",
+    likeBtn: "Like",
+    shareBtn: "Share",
+    readMore: "Read more",
+    reduceText: "Reduce text",
+    speakBtn: "Listen",
+    playBtn: "Play with Egyptian Blue"
+  },
+  kid: {
+    welcomeTitle: "Ciao Ragazzi, benvenuti a Ultrasky!",
+    welcomeDesc: "Scopri il Blu Egizio con giochi e curiosità!",
+    ultrsky01Title: "ULTRSKY 01 - Racconto",
+    likeBtn: "Mi piace!",
+    shareBtn: "Condividi",
+    readMore: "Leggi di più",
+    reduceText: "Riduci",
+    speakBtn: "Ascolta",
+    playBtn: "Gioca con il Blu Egizio"
   }
+};
 
-  // Aggiorna artisti
-  const nameEls=document.querySelectorAll('.artist-name');
-  artistsData.forEach((artist,idx)=>{
-    nameEls[idx].textContent=(lang==="it")? artist.nameIT : artist.nameEN;
+/* Mappatura voci di menù */
+const menuLabels = [
+  { id: "menu-blu-egizio",        it: "Alla scoperta del Blu Egizio", en: "Discovering Egyptian Blue" },
+  { id: "menu-storia",            it: "La Storia",                    en: "History" },
+  { id: "menu-scienza",           it: "La Scienza",                   en: "Science" },
+  { id: "menu-arti",              it: "Le Arti",                      en: "Arts" },
+  { id: "menu-programma",         it: "Programma",                    en: "Program" },
+  { id: "btn-artisti",            it: "Artisti",                      en: "Artists" },
+  { id: "menu-contatti",          it: "Contatti",                     en: "Contacts" },
+  { id: "menu-catalogo-digitale", it: "Catalogo Digitale",            en: "Digital Catalog" },
+  { id: "menu-crediti",           it: "Crediti",                      en: "Credits" },
+  { id: "btn-change-mode",        it: "Cambia Modalità",              en: "Change Mode" },
+  { id: "btn-language",           it: "Lingua (IT/EN)",               en: "Language (IT/EN)" }
+];
+
+function updateLanguage(lang){
+  currentLang = lang;
+  const t = translations[lang];
+
+  // Aggiorno i testi home
+  document.getElementById('welcome-title').textContent = t.welcomeTitle;
+  document.getElementById('welcome-desc').textContent  = t.welcomeDesc;
+  document.getElementById('ultrsky01-title').textContent = t.ultrsky01Title;
+
+  // Bottoni vari
+  const likeB = document.getElementById('like-btn');
+  if(likeB) likeB.textContent = t.likeBtn;
+  const shareB = document.getElementById('share-btn');
+  if(shareB) shareB.textContent = t.shareBtn;
+  const readMB = document.getElementById('read-more-btn');
+  if(readMB) readMB.textContent = t.readMore;
+  const reduceB = document.getElementById('reduce-btn');
+  if(reduceB) reduceB.textContent = t.reduceText;
+
+  // Aggiorno le voci di menù
+  menuLabels.forEach(item => {
+    const el = document.getElementById(item.id);
+    if (el) {
+      el.textContent = (lang === "en") ? item.en : item.it;
+    }
   });
 
-  // Ricarica ULTRSKY
+  // Ricarico le card ULTRSKY
   refreshUltrskyCards();
 }
-document.getElementById('btn-language').addEventListener('click',()=>{
-  if(currentLang==="it"){
+
+/***********************/
+/*   LINGUA (IT/EN)    */
+/***********************/
+document.getElementById('btn-language').addEventListener('click', () => {
+  if(currentLang === "it"){
     updateLanguage("en");
+  } else if(currentLang === "en"){
+    updateLanguage("it");
   } else {
     updateLanguage("it");
   }
 });
 
-/***********************
- * ARTISTI
- ***********************/
-const artistsGrid=document.getElementById('artists-grid');
-const artistsData=[
+/***********************************************************************************************/
+/*   ARTISTI cartella testi_artisti                                                            */
+/* questa è la sezione dei testi relativi ad ogni singolo artista e si apre dal menu hamburger */
+/***********************************************************************************************/
+
+
+const artistsGrid = document.getElementById('artists-grid');
+const artistsData = [
   {
-    nameIT:"Viola Alpi",
-    nameEN:"Viola Alpi",
-    photo:"https://raw.githubusercontent.com/gfq40/grandtour/main/artisti/alpi_image.jpg",
-    textIT:"https://raw.githubusercontent.com/gfq40/grandtour/main/artisti/testi/viola%20alpi.txt",
-    textEN:"https://raw.githubusercontent.com/gfq40/grandtour/main/artisti/testi/Viola%20Alpi_en.txt"
+    nameIT: "Viola Alpi",
+    nameEN: "Viola Alpi",
+    photo: "https://raw.githubusercontent.com/gfq40/grandtour/main/artisti/alpi_image.jpg",
+    textIT: "https://raw.githubusercontent.com/gfq40/grandtour/main/artisti/testi/viola%20alpi.txt",
+    textEN: "https://raw.githubusercontent.com/gfq40/grandtour/main/artisti/testi/Viola%20Alpi_en.txt"
   },
   {
-    nameIT:"CaCO3",
-    nameEN:"CaCO3",
-    photo:"https://raw.githubusercontent.com/gfq40/grandtour/main/artisti/caco3_image.jpg",
-    textIT:"https://raw.githubusercontent.com/gfq40/grandtour/main/artisti/testi/caco3_it.txt",
-    textEN:"https://raw.githubusercontent.com/gfq40/grandtour/main/artisti/testi/CaCO3_en.txt"
+    nameIT: "CaCO3",
+    nameEN: "CaCO3",
+    photo: "https://www.cifram.it/ultrasky/artisti/img_artisti/caco3_image.jpg",
+    textIT: "https:///www.cifram.it/ultrasky/artisti/testi_artisti/caco3_it.txt",
+    textEN: "https:///www.cifram.it/ultrasky/artisti/testi_artisti/caco3_en.txt"
   }
 ];
-artistsData.forEach(artist=>{
-  const card=document.createElement('div');
-  card.className='artist-card';
+artistsData.forEach(artist => {
+  const card = document.createElement('div');
+  card.className = 'artist-card';
 
-  const img=document.createElement('img');
-  img.src=artist.photo;
+  const img = document.createElement('img');
+  img.alt = "Ritratto di " + artist.nameIT;
+  img.src = artist.photo;
 
-  const nm=document.createElement('div');
-  nm.className='artist-name';
-  nm.textContent=artist.nameIT; // default IT
+  const nm = document.createElement('div');
+  nm.className = 'artist-name';
+  nm.textContent = artist.nameIT;
 
   card.appendChild(img);
   card.appendChild(nm);
-  card.addEventListener('click',()=>{
-    const url=(currentLang==="it")? artist.textIT : artist.textEN;
+  card.addEventListener('click', () => {
+    const url = (currentLang === "it" || currentLang === "kid") ? artist.textIT : artist.textEN;
     fetch(url)
-      .then(res=>res.text())
-      .then(txt=>{
-        document.getElementById('artist-modal-name').textContent=(currentLang==="it")? artist.nameIT : artist.nameEN;
-        document.getElementById('artist-modal-body').textContent=txt;
+      .then(res => res.text())
+      .then(txt => {
+        document.getElementById('artist-modal-name').textContent = (currentLang === "it" || currentLang === "kid") ? artist.nameIT : artist.nameEN;
+        document.getElementById('artist-modal-body').textContent = txt;
         document.getElementById('artist-modal').classList.add('active');
       })
-      .catch(err=>console.error("fetch artist text error:", err));
+      .catch(err => console.error("fetch artist text error:", err));
   });
 
   artistsGrid.appendChild(card);
 });
 
-/***********************
- * ULTRSKY
- ***********************/
-const ultrskyListEl=document.getElementById('exhibition-list');
+/***********************/
+/*   ULTRSKY           */
+/***********************/
+const ultrskyListEl = document.getElementById('exhibition-list');
+const caco3TextIT = "https://raw.githubusercontent.com/gfq40/grandtour/main/text/caco3_it.txt";
+const caco3TextEN = "https://raw.githubusercontent.com/gfq40/grandtour/main/text/caco3_en.txt";
 
-// Link caco3 text
-const caco3TextIT="https://raw.githubusercontent.com/gfq40/grandtour/main/text/caco3_it.txt";
-const caco3TextEN="https://raw.githubusercontent.com/gfq40/grandtour/main/text/caco3_en.txt";
-
-// 20 schede
-const ultrskyPieces=[
+const ultrskyPieces = [
   {
-    id:1,
-    titleIT:"ULTRSKY 01",
-    descIT:"Approfondimento su micromosaico e CACO3.",
-    titleEN:"ULTRSKY 01",
-    descEN:"Insights on micro-mosaic and CACO3.",
-    audioIT:"https://raw.githubusercontent.com/gfq40/grandtour/main/audio/caco3_it.mp3",
-    audioEN:"https://raw.githubusercontent.com/gfq40/grandtour/main/audio/caco3_en.mp3",
-    hasExtended:true
+    id: 1,
+    titleIT: "ULTRSKY 01",
+    descIT: "Approfondimento su micromosaico e CACO3.",
+    titleEN: "ULTRSKY 01",
+    descEN: "Insights on micro-mosaic and CACO3.",
+    audioIT: "https://raw.githubusercontent.com/gfq40/grandtour/main/audio/caco3_it.mp3",
+    audioEN: "https://raw.githubusercontent.com/gfq40/grandtour/main/audio/caco3_en.mp3",
+    hasExtended: true
   },
   {
-    id:2,
-    titleIT:"ULTRSKY 02",
-    descIT:"Un turbinio di colori e particelle in danza cosmica.",
-    titleEN:"ULTRSKY 02",
-    descEN:"A swirl of colors and cosmic dance.",
-    audioIT:"",
-    audioEN:""
+    id: 2,
+    titleIT: "ULTRSKY 02",
+    descIT: "Un turbinio di colori e particelle in danza cosmica.",
+    titleEN: "ULTRSKY 02",
+    descEN: "A swirl of colors and cosmic dance.",
+    audioIT: "",
+    audioEN: ""
   },
-  // ... puoi completare fino a 20 ...
   {
-    id:20,
-    titleIT:"ULTRSKY 20",
-    descIT:"Polittico monumentale, scene cosmiche e simboli alchemici...",
-    titleEN:"ULTRSKY 20",
-    descEN:"Monumental polyptych, cosmic scenes & alchemical symbols...",
-    audioIT:"",
-    audioEN:""
+    id: 20,
+    titleIT: "ULTRSKY 20",
+    descIT: "Polittico monumentale, scene cosmiche e simboli alchemici...",
+    titleEN: "ULTRSKY 20",
+    descEN: "Monumental polyptych, cosmic scenes & alchemical symbols...",
+    audioIT: "",
+    audioEN: ""
   }
 ];
 
-// Creazione schede
 function refreshUltrskyCards(){
-  ultrskyListEl.innerHTML="";
-  ultrskyPieces.forEach(piece=>{
-    const card=document.createElement('div');
-    card.className='piece-card';
+  ultrskyListEl.innerHTML = "";
+  ultrskyPieces.forEach(piece => {
+    const card = document.createElement('div');
+    card.className = 'piece-card';
 
-    const h3=document.createElement('h3');
-    h3.className='piece-title';
-    h3.textContent=(currentLang==="it")? piece.titleIT : piece.titleEN;
+    const h3 = document.createElement('h3');
+    h3.className = 'piece-title';
+    h3.textContent = (currentLang === "it" || currentLang === "kid") ? piece.titleIT : piece.titleEN;
 
-    const dsc=document.createElement('div');
-    dsc.className='piece-desc';
-    dsc.textContent=(currentLang==="it")? piece.descIT : piece.descEN;
+    const dsc = document.createElement('div');
+    dsc.className = 'piece-desc';
+    dsc.textContent = (currentLang === "it" || currentLang === "kid") ? piece.descIT : piece.descEN;
 
-    const audioEl=document.createElement('audio');
-    audioEl.style.display='none';
-    audioEl.controls=true;
+    const audioEl = document.createElement('audio');
+    audioEl.style.display = 'none';
+    audioEl.controls = true;
 
-    const speakBtn=document.createElement('button');
-    speakBtn.className='speak-btn';
-    speakBtn.dataset.playing="false";
-    speakBtn.textContent=(currentLang==="it")? "Ascolta" : "Listen";
+    const speakBtn = document.createElement('button');
+    speakBtn.className = 'speak-btn';
+    speakBtn.dataset.playing = "false";
+    speakBtn.textContent = (currentLang === "it" || currentLang === "kid")
+      ? translations[currentLang].speakBtn
+      : translations.en.speakBtn;
 
-    speakBtn.addEventListener('click',(e)=>{
+    speakBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      toggleAudio(speakBtn,audioEl,piece);
+      toggleAudio(speakBtn, audioEl, piece);
     });
 
     card.appendChild(h3);
@@ -771,33 +1543,32 @@ function refreshUltrskyCards(){
     card.appendChild(speakBtn);
     card.appendChild(audioEl);
 
-    card.addEventListener('click',()=>{
-      if(piece.id===1 && piece.hasExtended){
-        fetch((currentLang==="it")? caco3TextIT : caco3TextEN)
-          .then(res=>res.text())
-          .then(txt=>{
-            // Dividiamo testo in due parti (breve e resto)
-            let shortLen=200;
+    // ULTRSKY 01 - approfondimento
+    card.addEventListener('click', () => {
+      if(piece.id === 1 && piece.hasExtended){
+        fetch((currentLang === "it" || currentLang === "kid") ? caco3TextIT : caco3TextEN)
+          .then(res => res.text())
+          .then(txt => {
+            let shortLen = 200;
             let shortText = txt.substring(0, shortLen);
             let fullText  = txt.substring(shortLen);
 
-            document.getElementById('ultrsky01-short').textContent= shortText.trim()+"...";
+            document.getElementById('ultrsky01-short').textContent = shortText.trim() + "...";
             document.getElementById('ultrsky01-full').textContent = fullText.trim();
 
-            // Se il fullText è molto breve, nascondi readMore
-            if(fullText.trim().length<10){
-              document.getElementById('read-more-btn').style.display='none';
-              document.getElementById('reduce-btn').style.display='none';
+            if(fullText.trim().length < 10){
+              document.getElementById('read-more-btn').style.display = 'none';
+              document.getElementById('reduce-btn').style.display = 'none';
             } else {
-              document.getElementById('read-more-btn').style.display='inline';
-              document.getElementById('reduce-btn').style.display='none';
-              document.getElementById('ultrsky01-full').style.display='none';
+              document.getElementById('read-more-btn').style.display = 'inline';
+              document.getElementById('reduce-btn').style.display = 'none';
+              document.getElementById('ultrsky01-full').style.display = 'none';
             }
 
             closeAllModals();
             document.getElementById('modal-ultrsky01-extended').classList.add('active');
           })
-          .catch(err=>console.error("fetch caco3 text error:",err));
+          .catch(err => console.error("fetch caco3 text error:", err));
       }
     });
 
@@ -805,127 +1576,396 @@ function refreshUltrskyCards(){
   });
 }
 
-// Audio toggle
-function toggleAudio(btn,audioEl,piece){
-  if(btn.dataset.playing==="false"){
-    audioEl.currentTime=0;
-    audioEl.src=(currentLang==="it")? piece.audioIT : piece.audioEN;
+function toggleAudio(btn, audioEl, piece){
+  if(btn.dataset.playing === "false"){
+    audioEl.currentTime = 0;
+    audioEl.src = ((currentLang === "it" || currentLang === "kid") ? piece.audioIT : piece.audioEN) || "";
     audioEl.play();
-    btn.dataset.playing="true";
-    btn.textContent=(currentLang==="it")?"Interrompi":"Stop";
+    btn.dataset.playing = "true";
+    btn.textContent = (currentLang === "it" || currentLang === "kid") ? "Interrompi" : "Stop";
   } else {
     audioEl.pause();
-    audioEl.currentTime=0;
-    btn.dataset.playing="false";
-    btn.textContent=(currentLang==="it")?"Ascolta":"Listen";
+    audioEl.currentTime = 0;
+    btn.dataset.playing = "false";
+    btn.textContent = (currentLang === "it" || currentLang === "kid")
+      ? translations[currentLang].speakBtn
+      : translations.en.speakBtn;
   }
 }
 
-/***********************
- * LIKE su ULTRSKY 01
- ***********************/
-let likeCount=0;
-const likeBtn=document.getElementById('like-btn');
-const likeCountSpan=document.getElementById('like-count');
-const liked=localStorage.getItem('ultrsky01_liked'); 
-if(liked==='true'){
-  likeCount=1;
-  likeCountSpan.textContent=likeCount;
-  likeBtn.disabled=true;
-  likeBtn.textContent="Liked!";
+/***********************/
+/*   LIKE & SHARE      */
+/***********************/
+let likeCount = 0;
+const likeBtn = document.getElementById('like-btn');
+const likeCountSpan = document.getElementById('like-count');
+const liked = localStorage.getItem('ultrsky01_liked'); 
+if(liked === 'true'){
+  likeCount = 1;
+  if(likeCountSpan) likeCountSpan.textContent = likeCount;
+  if(likeBtn){
+    likeBtn.disabled = true;
+    likeBtn.textContent = "Liked!";
+  }
 }
 if(likeBtn){
-  likeBtn.addEventListener('click',()=>{
+  likeBtn.addEventListener('click', () => {
     if(!localStorage.getItem('ultrsky01_liked')){
       likeCount++;
-      likeCountSpan.textContent=likeCount;
-      likeBtn.disabled=true;
-      likeBtn.textContent="Liked!";
-      localStorage.setItem('ultrsky01_liked','true');
+      if(likeCountSpan) likeCountSpan.textContent = likeCount;
+      likeBtn.disabled = true;
+      likeBtn.textContent = "Liked!";
+      localStorage.setItem('ultrsky01_liked', 'true');
     }
   });
 }
 
-/***********************
- * SHARE su ULTRSKY 01
- ***********************/
-const shareBtn=document.getElementById('share-btn');
-const sharePopup=document.getElementById('share-popup');
-const photoURL="https://mywebsite.com/foto-ultrsky01.jpg";
+const shareBtn = document.getElementById('share-btn');
+const sharePopup = document.getElementById('share-popup');
+const photoURL = "https://mywebsite.com/foto-ultrsky01.jpg";
 
 if(shareBtn){
-  shareBtn.addEventListener('click',(e)=>{
+  shareBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    sharePopup.classList.toggle('active');
+    if(sharePopup) sharePopup.classList.toggle('active');
   });
 }
-document.addEventListener('click',(e)=>{
-  if(sharePopup.classList.contains('active') && e.target!==shareBtn && !sharePopup.contains(e.target)){
+document.addEventListener('click', (e) => {
+  if(sharePopup && sharePopup.classList.contains('active') && e.target !== shareBtn && !sharePopup.contains(e.target)){
     sharePopup.classList.remove('active');
   }
 });
-const shareIcons=document.querySelectorAll('.share-icon');
-shareIcons.forEach(icon=>{
-  icon.addEventListener('click',(e)=>{
+document.querySelectorAll('.share-icon').forEach(icon => {
+  icon.addEventListener('click', (e) => {
     e.stopPropagation();
-    const social=icon.dataset.social;
-    let url="";
-    if(social==="facebook"){
-      url=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(photoURL)}`;
-    } else if(social==="x"){
-      url=`https://twitter.com/intent/tweet?url=${encodeURIComponent(photoURL)}`;
-    } else if(social==="instagram"){
-      url=`https://www.instagram.com/`;
+    const social = icon.dataset.social;
+    let url = "";
+    if(social === "facebook"){
+      url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(photoURL)}`;
+    } else if(social === "x"){
+      url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(photoURL)}`;
+    } else if(social === "instagram"){
+      url = `https://www.instagram.com/`;
     }
-    window.open(url,"_blank");
-    sharePopup.classList.remove('active');
+    window.open(url, "_blank");
+    if(sharePopup) sharePopup.classList.remove('active');
   });
 });
 
-/***********************
- * Leggi di più / Riduci
- ***********************/
+/***********************/
+/* LEGGI DI PIÙ / RIDUCI*/
+/***********************/
 const readMoreBtn = document.getElementById('read-more-btn');
-const reduceBtn   = document.getElementById('reduce-btn');
-const shortDiv    = document.getElementById('ultrsky01-short');
-const fullDiv     = document.getElementById('ultrsky01-full');
+const reduceBtn = document.getElementById('reduce-btn');
+const shortDiv = document.getElementById('ultrsky01-short');
+const fullDiv = document.getElementById('ultrsky01-full');
+
 if(readMoreBtn){
-  readMoreBtn.addEventListener('click',()=>{
-    fullDiv.style.display='block';
-    readMoreBtn.style.display='none';
-    reduceBtn.style.display='inline';
+  readMoreBtn.addEventListener('click', () => {
+    if(fullDiv){
+      fullDiv.style.display = 'block';
+      readMoreBtn.style.display = 'none';
+      reduceBtn.style.display = 'inline';
+    }
   });
 }
 if(reduceBtn){
-  reduceBtn.addEventListener('click',()=>{
-    fullDiv.style.display='none';
-    readMoreBtn.style.display='inline';
-    reduceBtn.style.display='none';
+  reduceBtn.addEventListener('click', () => {
+    if(fullDiv){
+      fullDiv.style.display = 'none';
+      readMoreBtn.style.display = 'inline';
+      reduceBtn.style.display = 'none';
+    }
   });
 }
 
-/***********************
- * INIT
- ***********************/
-function init(){
-  homeSection.style.display='block';
-  ultrskyList.style.display='flex';
-  artistsSection.style.display='none';
+/***********************/
+/* TORNARE HOME DALLA SEZIONE GIOCHI  */
+/***********************/
+const btnBackKidsHome = document.getElementById('btn-back-kids-home');
+btnBackKidsHome.addEventListener('click', () => {
+  kidsGameSection.style.display = 'none';
+  homeSection.style.display = 'block';
+  if(isKidMode) exhibitionListEl.style.display = 'flex'; 
+});
+
+/***********************/
+/*   MENU GIOCHI       */
+/***********************/
+document.getElementById('btn-plinio').addEventListener('click', () => {
+  hideGames();
+  gamePlinio.style.display = 'block';
+});
+document.getElementById('btn-chimico').addEventListener('click', () => {
+  hideGames();
+  gameChimico.style.display = 'block';
+});
+function hideGames(){
+  gamePlinio.style.display = 'none';
+  gameChimico.style.display = 'none';
+}
+
+/* TORNARE DALL’INTERNO DEI GIOCHI */
+document.getElementById('btn-back-plinio').addEventListener('click', () => {
+  gamePlinio.style.display = 'none';
+  kidsGameSection.style.display = 'block';
+});
+document.getElementById('btn-back-chimico').addEventListener('click', () => {
+  gameChimico.style.display = 'none';
+  kidsGameSection.style.display = 'block';
+});
+
+/***********************/
+/*   LINK TESTO MENU   */
+/***********************/
+const menuItems = [
+  {
+    id: "menu-blu-egizio",
+    textIT: "https://raw.githubusercontent.com/gfq40/ultrasky/main/testi_menu/alla_scoperta_del_blu_egizio.txt",
+    textEN: "https://raw.githubusercontent.com/gfq40/ultrasky/main/testi_menu/alla_scoperta_del_blu_egizio_en.txt",
+    titleIT: "Alla scoperta del Blu Egizio",
+    titleEN: "Discovering Egyptian Blue"
+  },
+  {
+    id: "menu-storia",
+    textIT: "https://raw.githubusercontent.com/gfq40/ultrasky/main/testi_menu/la_storia.txt",
+    textEN: "https://raw.githubusercontent.com/gfq40/ultrasky/main/testi_menu/la_storia_en.txt",
+    titleIT: "La Storia",
+    titleEN: "History"
+  },
+  {
+    id: "menu-scienza",
+    textIT: "https://raw.githubusercontent.com/gfq40/ultrasky/main/testi_menu/la_scienza.txt",
+    textEN: "https://raw.githubusercontent.com/gfq40/ultrasky/main/testi_menu/la_scienza_en.txt",
+    titleIT: "La Scienza",
+    titleEN: "Science"
+  },
+  {
+    id: "menu-arti",
+    textIT: "https://raw.githubusercontent.com/gfq40/ultrasky/main/testi_menu/le_arti.txt",
+    textEN: "https://raw.githubusercontent.com/gfq40/ultrasky/main/testi_menu/le_arti_en.txt",
+    titleIT: "Le Arti",
+    titleEN: "Arts"
+  },
+  {
+    id: "menu-programma",
+    textIT: "https://raw.githubusercontent.com/gfq40/ultrasky/main/testi_menu/programma.txt",
+    textEN: "https://raw.githubusercontent.com/gfq40/ultrasky/main/testi_menu/programma_en.txt",
+    titleIT: "Programma",
+    titleEN: "Program"
+  },
+  {
+    id: "menu-contatti",
+    textIT: "https://raw.githubusercontent.com/gfq40/ultrasky/main/testi_menu/contatti.txt",
+    textEN: "https://raw.githubusercontent.com/gfq40/ultrasky/main/testi_menu/contatti_en.txt",
+    titleIT: "Contatti",
+    titleEN: "Contacts"
+  }
+];
+
+menuItems.forEach(item => {
+  const el = document.getElementById(item.id);
+  if(!el) return;
+  el.addEventListener('click', () => {
+    closeAllModals();
+    document.body.classList.remove('menu-open');
+    const url = (currentLang === "it" || currentLang === "kid") ? item.textIT : item.textEN;
+    fetch(url)
+      .then(res => res.text())
+      .then(txt => {
+        const title = (currentLang === "it" || currentLang === "kid") ? item.titleIT : item.titleEN;
+        document.getElementById('menu-info-title').textContent = title;
+        document.getElementById('menu-info-body').textContent = txt;
+        document.getElementById('menu-info-modal').classList.add('active');
+      })
+      .catch(err => {
+        console.error("Errore caricamento testo menu:", err);
+      });
+  });
+});
+
+/***********************/
+/*   AVVIO DELL’APP    */
+/***********************/
+function startApp(){
+  if(isKidMode) {
+    document.body.classList.add('kid-mode');
+  } else {
+    document.body.classList.remove('kid-mode');
+  }
+
+  homeSection.style.display = 'block';
+  exhibitionListEl.style.display = 'flex';
+
+  artistsSection.style.display = 'none';
+  kidsGameSection.style.display = 'none';
+  btnBackSelection.style.display = 'inline-block';
 
   refreshUltrskyCards();
-  updateLanguage("it");
+}
+
+function init(){
+  hideAllSections();
 }
 init();
-</script>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker
-        .register('./sw.js')
-        .then(() => console.log('Service Worker registered'))
-        .catch(err => console.error('Service Worker registration failed:', err));
-    });
+
+/***********************/
+/* BOLLE: dimensione e posizione random in JS          */
+/***********************/
+document.querySelectorAll('.bubble').forEach(bubble => {
+  let size = Math.floor(Math.random() * 60) + 20;
+  bubble.style.width = size + "px";
+  bubble.style.height = size + "px";
+  let leftPos = Math.random() * 100;
+  bubble.style.left = leftPos + "%";
+  let delay = Math.random() * 5;
+  bubble.style.animationDelay = delay + "s";
+  let duration = 8 + Math.random() * 5;
+  bubble.style.animationDuration = duration + "s";
+});
+
+/***********************/
+/*   FUOCHI D’ARTIFICIO: lancia animazione su .firework */
+/***********************/
+const fireworksContainer = document.getElementById('fireworks-container');
+function launchFirework(x, y){
+  const fw = document.createElement('div');
+  fw.className = 'firework';
+  fw.style.left = x + "px";
+  fw.style.top = y + "px";
+  fireworksContainer.appendChild(fw);
+  setTimeout(() => {
+    fw.remove();
+  }, 1200);
+}
+
+/********************************************************/
+/*   Distanza di Levenshtein (fuzzy) + parole chiave     */
+/********************************************************/
+function levenshtein(a, b) {
+  const an = a.length, bn = b.length;
+  if (an === 0) return bn;
+  if (bn === 0) return an;
+  const matrix = Array.from({ length: bn + 1 }, () => new Array(an + 1));
+  for (let i = 0; i <= bn; i++) matrix[i][0] = i;
+  for (let j = 0; j <= an; j++) matrix[0][j] = j;
+  for (let i = 1; i <= bn; i++) {
+    for (let j = 1; j <= an; j++) {
+      const cost = b[i - 1] === a[j - 1] ? 0 : 1;
+      matrix[i][j] = Math.min(
+        matrix[i - 1][j] + 1,
+        matrix[i][j - 1] + 1,
+        matrix[i - 1][j - 1] + cost
+      );
+    }
   }
+  return matrix[bn][an];
+}
+function isFuzzyMatch(strA, strB, maxDistance = 2){
+  return levenshtein(strA, strB) <= maxDistance;
+}
+function partialFuzzyMatch(wordArray, synonyms, maxDist = 2){
+  for (let w of wordArray) {
+    for (let syn of synonyms) {
+      if (isFuzzyMatch(w, syn, maxDist)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+const synonymsActionShow = ["mostra", "vai", "vedi", "visualizza", "fammi vedere", "portami", "voglio vedere"];
+const synonymsActionListen = ["ascolta", "riproduci", "play"];
+const synonymsArtists = ["artisti", "artiste", "artista"];
+const synonymsStoria = ["storia"];
+const synonymsScienza = ["scienza"];
+const synonymsArti = ["arti", "le arti"];
+const synonymsBluEgizio = ["blu", "blu egizio", "scoperta"];
+const synonymsUltrsky01 = ["ultrsky 01", "ultrasky01", "ultra sky 01"];
+const synonymsArtistCaco3 = ["caco3", "c a c o 3"];
+const synonymsArtistViola = ["viola", "viola alpi"];
+
+function checkShowArtists(transcript){
+  const words = transcript.split(/\s+/);
+  const hasAction = partialFuzzyMatch(words, synonymsActionShow, 2);
+  const hasArtists = partialFuzzyMatch(words, synonymsArtists, 2);
+  return (hasAction && hasArtists);
+}
+function checkShowStoria(transcript){
+  const words = transcript.split(/\s+/);
+  const hasAction = partialFuzzyMatch(words, synonymsActionShow, 2);
+  const hasStoria = partialFuzzyMatch(words, synonymsStoria, 2);
+  return (hasAction && hasStoria);
+}
+function checkShowScienza(transcript){
+  const words = transcript.split(/\s+/);
+  const hasAction = partialFuzzyMatch(words, synonymsActionShow, 2);
+  const hasScienza = partialFuzzyMatch(words, synonymsScienza, 2);
+  return (hasAction && hasScienza);
+}
+function checkShowArti(transcript){
+  const words = transcript.split(/\s+/);
+  const hasAction = partialFuzzyMatch(words, synonymsActionShow, 2);
+  const hasArti = partialFuzzyMatch(words, synonymsArti, 2);
+  return (hasAction && hasArti);
+}
+function checkShowBluEgizio(transcript){
+  const words = transcript.split(/\s+/);
+  const hasAction = partialFuzzyMatch(words, synonymsActionShow, 2);
+  const hasBlu = partialFuzzyMatch(words, synonymsBluEgizio, 2);
+  return (hasAction && hasBlu);
+}
+function checkListenUltrsky01(transcript){
+  const words = transcript.split(/\s+/);
+  const hasListen = partialFuzzyMatch(words, synonymsActionListen, 2);
+  const hasU01 = partialFuzzyMatch(words, synonymsUltrsky01, 2);
+  return (hasListen && hasU01);
+}
+function checkShowArtistCaco3(transcript){
+  const words = transcript.split(/\s+/);
+  const hasAction = partialFuzzyMatch(words, synonymsActionShow, 2);
+  const hasCaco3 = partialFuzzyMatch(words, synonymsArtistCaco3, 2);
+  return (hasAction && hasCaco3);
+}
+function checkShowArtistViola(transcript){
+  const words = transcript.split(/\s+/);
+  const hasAction = partialFuzzyMatch(words, synonymsActionShow, 2);
+  const hasViola = partialFuzzyMatch(words, synonymsArtistViola, 2);
+  return (hasAction && hasViola);
+}
+
+function loadMenu(menuId){
+  closeAllModals();
+  document.body.classList.remove('menu-open');
+  const el = document.getElementById(menuId);
+  if(el) el.click();
+}
+
+function playUltrsky01Audio(){
+  console.log(">> Audio ULTRSKY 01 in riproduzione (implementa la tua logica)");
+  hideAllSections();
+  exhibitionListEl.style.display = 'flex';
+}
+
+function openArtistModal(artistName){
+  hideAllSections();
+  artistsSection.style.display = 'block';
+  console.log(`>> Apertura modale artista: ${artistName}`);
+}
+
+/************************************/
+const themeToggleBtn = document.getElementById('theme-toggle');
+if(themeToggleBtn){
+  themeToggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    if(document.body.classList.contains('light-mode')){
+      themeToggleBtn.textContent = "🌙";
+    } else {
+      themeToggleBtn.textContent = "☀️";
+    }
+  });
+}
 </script>
 </body>
 </html>
